@@ -1,0 +1,7 @@
+<h1><%= @event.title %></h1>
+<p>Lieu : <%= @event.location %></p>
+<p>Prix : <%= @event.price %>€</p>
+<p>Description : <%= @event.description %></p>
+<p>Admin : <%= @event.admin.first_name %></p>
+
+<%= link_to "Retour", root_path %>

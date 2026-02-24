@@ -1,0 +1,10 @@
+<h1>Profil de <%= @user.first_name %> <%= @user.last_name %></h1>
+<p>Email : <%= @user.email %></p>
+<p>Description : <%= @user.description %></p>
+
+<h3>Événements organisés :</h3>
+<ul>
+  <% @user.administered_events.each do |event| %>
+    <li><%= link_to event.title, event_path(event.id) %></li>
+  <% end %>
+</ul>

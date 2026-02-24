@@ -1,0 +1,30 @@
+<body>
+  <header>
+    <nav style="padding: 1rem; border-bottom: 1px solid #ccc; display: flex; gap: 15px; align-items: center;">
+      <%= link_to "Eventbrite THP", root_path, style: "font-weight: bold; text-decoration: none; font-size: 1.2rem;" %>
+      
+      <div style="margin-left: auto; display: flex; gap: 15px;">
+        <% if user_signed_in? %>
+          <%= link_to "Créer un événement", new_event_path %>
+          <%= link_to "Mon Profil", user_path(current_user.id) %>
+          <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, style: "color: red;" %>
+        <% else %>
+          <%= link_to "Connexion", new_user_session_path %>
+          <%= link_to "Inscription", new_user_registration_path %>
+        <% end %>
+      </div>
+    </nav>
+  </header>
+
+  <section style="max-width: 800px; margin: 10px auto;">
+    <% flash.each do |type, msg| %>
+      <div style="padding: 10px; margin-bottom: 10px; border-radius: 5px; background-color: <%= type == 'notice' ? '#d4edda' : '#f8d7da' %>; border: 1px solid <%= type == 'notice' ? '#c3e6cb' : '#f5c6cb' %>;">
+        <%= msg %>
+      </div>
+    <% end %>
+  </section>
+
+  <main style="max-width: 800px; margin: 20px auto; padding: 0 15px;">
+    <%= yield %>
+  </main>
+</body>

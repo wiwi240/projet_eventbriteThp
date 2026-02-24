@@ -3,16 +3,17 @@ class UserMailer < ApplicationMailer
 
   def welcome_email(user)
     @user = user 
-    @url  = 'http://eventbrite-thp.fr/login' 
+    @url  = 'http://localhost:3000/login' 
     mail(to: @user.email, subject: 'Bienvenue sur Eventbrite Ville !') 
   end
 
-  # Ajoute ceci pour les participations
   def attendance_email(attendance)
     @attendance = attendance
     @admin = attendance.event.admin
     @event = attendance.event
+    @participant = attendance.user
 
-    mail(to: @admin.email, subject: 'Nouveau participant à ton événement !')
+    # Notification envoyée à ton adresse spécifique
+    mail(to: 'wiwi.test1402@gmail.com', subject: 'Alerte : Nouveau participant sur la plateforme !')
   end
 end

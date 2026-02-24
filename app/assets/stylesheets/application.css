@@ -11,18 +11,60 @@ body {
   background-color: var(--bg-light);
 }
 
-/* --- NAVIGATION --- */
+/* --- NAVIGATION & NAVBAR --- */
 .navbar {
   backdrop-filter: blur(8px);
   background: rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
 }
 
 .ls-tight {
   letter-spacing: -0.05em;
 }
 
-.navbar-brand {
-  letter-spacing: -0.5px;
+/* --- JUMBOTRON & GRADIENTS --- */
+.bg-hero-gradient {
+  background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%) !important;
+  color: white !important;
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.1);
+}
+
+/* --- CONFIGURATION AVATAR --- */
+.avatar-container {
+  width: 40px !important;
+  height: 40px !important;
+  overflow: hidden;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  background-color: #f8f9fa;
+  transition: transform 0.2s ease-in-out;
+}
+
+.avatar-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block;
+}
+
+.avatar-container:hover {
+  transform: scale(1.05);
+}
+
+/* --- CARTES & ÉVÉNEMENTS --- */
+.card {
+  border-radius: 16px;
+  border: none !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.event-card:hover, .hover-shadow:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* --- BOUTONS --- */
@@ -35,38 +77,23 @@ body {
 .btn-primary:hover {
   background-color: var(--primary-hover) !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3) !important;
 }
 
-/* --- CARTES & ÉVÉNEMENTS --- */
-.card {
-  border-radius: 12px;
-  border: none;
+/* --- UTILITAIRES & ANIMATIONS --- */
+.shadow-custom {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
 }
 
-.event-card {
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+.animate.slideIn {
+  animation: slideIn 0.3s ease-out;
 }
 
-.event-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.hover-shadow:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 1rem 3rem rgba(0,0,0,.1) !important;
-}
-
-/* --- UTILITAIRES --- */
-.transition {
-  transition: all var(--transition-speed) ease;
-}
-
-.bg-soft-primary {
-  background-color: #e7f1ff;
-}
-
-.bg-hero-gradient {
-  background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%) !important;
+.transition-up {
+  transition: all 0.3s ease;
 }

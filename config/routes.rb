@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   root "events#index"
   devise_for :users
-  resources :events
+  
+  # Ressources imbriquées pour créer le lien parent/enfant
+  resources :events do
+    resources :attendances, only: [:create]
+  end
+
   resources :users, only: [:show]
 
   # PWA routes

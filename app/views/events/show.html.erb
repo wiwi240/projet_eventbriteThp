@@ -53,9 +53,15 @@
             </div>
             <div>
               <% if user_signed_in? %>
-                <button class="btn btn-primary rounded-pill px-4 shadow-sm" disabled>Rejoindre</button>
+                <% if @event.admin == current_user %>
+                  <span class="badge bg-secondary rounded-pill px-3 py-2">Mon événement</span>
+                <% elsif @event.users.include?(current_user) %>
+                  <button class="btn btn-success rounded-pill px-4 shadow-sm" disabled>Inscrit ✓</button>
+                <% else %>
+                  <%= button_to "Rejoindre", event_attendances_path(@event), method: :post, class: "btn btn-primary rounded-pill px-4 shadow-sm" %>
+                <% end %>
               <% else %>
-                <%= link_to "Se connecter pour s'inscrire", new_user_session_path, class: "btn btn-outline-primary rounded-pill px-4" %>
+                <%= link_to "S'inscrire", new_user_session_path, class: "btn btn-outline-primary rounded-pill px-4" %>
               <% end %>
             </div>
           </div>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body style="font-family: sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+      <h2 style="color: #0066FF;">Nouvelle inscription reçue !</h2>
+      <p>Bonjour <strong><%= @admin.first_name %></strong>,</p>
+      
+      <p>Un nouveau participant vient de s'inscrire à votre événement.</p>
+      
+      <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0;">
+        <p style="margin: 0;"><strong>Événement :</strong> <%= @event.title %></p>
+        <p style="margin: 5px 0 0 0;"><strong>Participant :</strong> <%= @participant.first_name %> <%= @participant.last_name %> (<%= @participant.email %>)</p>
+      </div>
+
+      <p>Vous pouvez consulter la liste de vos participants sur votre tableau de bord.</p>
+      
+      <p style="font-size: 0.9rem; color: #777; margin-top: 30px; border-top: 1px solid #eee; padding-top: 10px;">
+        L'équipe Eventbrite THP
+      </p>
+    </div>
+  </body>
+</html>

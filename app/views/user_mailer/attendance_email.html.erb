@@ -1,6 +1,7 @@
-<h1>Nouveau participant !</h1>
-<p>Salut <%= @admin.first_name %>,</p>
+<h1>Nouvelle inscription détectée</h1>
 <p>
-  L'utilisateur <%= @attendance.user.first_name %> vient de s'inscrire à ton événement : 
-  <strong><%= @event.title %></strong>.
+  L'utilisateur <strong><%= @participant.first_name %></strong> vient de s'inscrire à l'événement <strong><%= @event.title %></strong>.
+</p>
+<p>
+  L'organisateur de cet événement est : <%= @admin.email %>
 </p>

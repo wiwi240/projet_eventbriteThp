@@ -1,25 +1,61 @@
-# README
+# Eventbrite Clone - THP Project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Application Rails pour la gestion d'événements (projet THP).
 
-Things you may want to cover:
+## 🚀 Fonctionnalités
 
-* Ruby version
+- **Gestion des utilisateurs** via `devise`.
+- **Création d'événements** (titre, description, date, lieu).
+- **Système de participation** (attendances).
+- **Emails** (inscription, notifications d'événements).
 
-* System dependencies
+## 🛠 Stack technique (dans ce dépôt)
 
-* Configuration
+- **Backend**: Ruby on Rails (8.0.4)
+- **Base de données**: SQLite (développement/test) — voir `config/database.yml`
+- **Assets JS**: `importmap-rails` (pas de Webpacker/Yarn requis)
+- **Authentification**: Devise
+- **Analyse sécurité / lint**: Brakeman, RuboCop
 
-* Database creation
+## ⚙️ Installation locale
 
-* Database initialization
+1. Cloner le dépôt
 
-* How to run the test suite
+```bash
+git clone <url_du_depot>
+cd <repo>
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+2. Installer les dépendances Ruby
 
-* Deployment instructions
+```bash
+bundle install
+```
 
-* ...
-# projet_eventbriteThp
+3. Préparer la base de données
+
+```bash
+bin/rails db:migrate
+bin/rails db:seed
+```
+
+4. Variables d'environnement
+
+Créer un fichier `.env` (ou utiliser votre méthode) pour les clefs externes, par exemple :
+
+```env
+STRIPE_PUBLISHABLE_KEY=
+STRIPE_SECRET_KEY=
+```
+
+5. Lancer le serveur
+
+```bash
+bin/rails server
+```
+
+6. Lancer la suite de tests
+
+```bash
+bin/rails test
+```

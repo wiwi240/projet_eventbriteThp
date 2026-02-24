@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_23_164001) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_24_155457) do
   create_table "attendances", force: :cascade do |t|
     t.string "stripe_customer_id"
     t.integer "user_id", null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_23_164001) do
     t.integer "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "category"
     t.index ["admin_id"], name: "index_events_on_admin_id"
   end
 

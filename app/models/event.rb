@@ -16,6 +16,11 @@ class Event < ApplicationRecord
   validates :price, presence: true, inclusion: { in: 1..1000 }
   validates :location, presence: true
 
+  # Méthode d'instance pour calculer la date de fin
+  def end_date
+    start_date + (duration * 60)
+  end
+
   private
 
   def not_in_past

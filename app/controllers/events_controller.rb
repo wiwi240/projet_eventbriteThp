@@ -2,11 +2,15 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @events = Event.all
+    @events = Event.all.order(start_date: :asc)
   end
 
   def show
-    @event = Event.find(params[:id])
+    @event = Event.find_by(id: params[:id])
+
+    if @event.nil?
+      redirect_to root_path, alert: "Événement introuvable."
+    end
   end
 
   def new
@@ -18,8 +22,9 @@ class EventsController < ApplicationController
     @event.admin = current_user
 
     if @event.save
-      redirect_to event_path(@event.id), notice: "Événement créé !"
+      redirect_to event_path(@event), notice: "L'événement a été créé avec succès !"
     else
+      # Recharger les erreurs pour le formulaire
       render :new, status: :unprocessable_entity
     end
   end
@@ -27,6 +32,7 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location)
+    # Ajout de :category pour permettre l'enregistrement de la nouvelle donnée
+    params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location, :category)
   end
 end

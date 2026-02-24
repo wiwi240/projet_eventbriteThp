@@ -1,10 +1,72 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+/* --- VARIABLES & BASE --- */
+:root {
+  --primary-color: #0066FF;
+  --primary-hover: #0052cc;
+  --bg-light: #f8f9fa;
+  --transition-speed: 0.3s;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-light);
+}
+
+/* --- NAVIGATION --- */
+.navbar {
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.85) !important;
+}
+
+.ls-tight {
+  letter-spacing: -0.05em;
+}
+
+.navbar-brand {
+  letter-spacing: -0.5px;
+}
+
+/* --- BOUTONS --- */
+.btn-primary {
+  background-color: var(--primary-color) !important;
+  border: none !important;
+  transition: all var(--transition-speed) ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.2);
+}
+
+/* --- CARTES & ÉVÉNEMENTS --- */
+.card {
+  border-radius: 12px;
+  border: none;
+}
+
+.event-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.hover-shadow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1rem 3rem rgba(0,0,0,.1) !important;
+}
+
+/* --- UTILITAIRES --- */
+.transition {
+  transition: all var(--transition-speed) ease;
+}
+
+.bg-soft-primary {
+  background-color: #e7f1ff;
+}
+
+.bg-hero-gradient {
+  background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%) !important;
+}

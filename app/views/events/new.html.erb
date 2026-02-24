@@ -1,0 +1,88 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      
+      <%# Card Profil Principal %>
+      <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-5">
+        <div class="card-header bg-white py-4 border-bottom px-4 px-md-5">
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+            <h1 class="h3 fw-bold mb-0 text-dark">Mon Tableau de Bord</h1>
+            <%= link_to edit_user_registration_path, class: "btn btn-outline-secondary btn-sm rounded-pill px-3" do %>
+              <i class="bi bi-gear-fill me-1"></i> Modifier mes identifiants
+            <% end %>
+          </div>
+        </div>
+        
+        <div class="card-body p-4 p-md-5">
+          <div class="row align-items-center mb-5">
+            <div class="col-md-4 text-center border-end-md">
+              <div class="avatar bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 100px; height: 100px; font-size: 2.5rem; font-weight: 800;">
+                <%= @user.first_name.first.upcase if @user.first_name %><%= @user.last_name.first.upcase if @user.last_name %>
+              </div>
+              <h4 class="fw-bold mb-1 text-dark"><%= @user.first_name %> <%= @user.last_name %></h4>
+              <p class="text-muted small"><i class="bi bi-envelope me-1"></i><%= @user.email %></p>
+            </div>
+            
+            <div class="col-md-8 ps-md-5 mt-4 mt-md-0">
+              <h5 class="text-uppercase text-muted small fw-bold mb-3 letter-spacing-1">Ma Bio</h5>
+              <p class="text-secondary lh-lg">
+                <%= @user.description.presence || "Aucune description renseignée." %>
+              </p>
+            </div>
+          </div>
+
+          <hr class="my-5 opacity-50">
+
+          <%# Section Événements %>
+          <div class="events-section">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h3 class="h4 fw-bold mb-0">Mes événements organisés</h3>
+              <span class="badge bg-dark rounded-pill"><%= @user.administered_events.count %></span>
+            </div>
+            
+            <% if @user.administered_events.any? %>
+              <div class="row g-3">
+                <% @user.administered_events.each do |event| %>
+                  <div class="col-12">
+                    <%= link_to event_path(event.id), class: "card border shadow-none hover-shadow transition text-decoration-none p-3 rounded-3" do %>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                          <div class="bg-light rounded-2 p-2 me-3 text-primary d-none d-md-block">
+                            <i class="bi bi-calendar-check fs-5"></i>
+                          </div>
+                          <div>
+                            <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-10 px-2 py-1 rounded small fw-bold mb-1">
+                              <%= event.category.presence || "Général" %>
+                            </span>
+                            <h6 class="fw-bold text-dark mb-0"><%= event.title %></h6>
+                          </div>
+                        </div>
+                        <div class="text-end">
+                          <span class="d-block fw-bold text-primary"><%= event.price %> €</span>
+                          <small class="text-muted"><%= event.location %></small>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <div class="text-center py-5 bg-light rounded-4 border border-dashed">
+                <i class="bi bi-calendar-x text-muted fs-1 mb-3 d-block"></i>
+                <p class="text-muted mb-3">Vous n'avez pas encore créé d'événement.</p>
+                <%= link_to "Créer mon premier événement", new_event_path, class: "btn btn-primary rounded-pill px-4 fw-bold" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .border-end-md { border-right: 1px solid #dee2e6; }
+  @media (max-width: 767.98px) { .border-end-md { border-right: none; } }
+  .letter-spacing-1 { letter-spacing: 0.1rem; }
+  .border-dashed { border-style: dashed !important; border-width: 2px !important; }
+</style>

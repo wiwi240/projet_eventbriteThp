@@ -64,3 +64,4 @@ end
 
 gem 'table_print'
 gem 'devise' 
+gem 'faker'

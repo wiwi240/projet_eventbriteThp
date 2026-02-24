@@ -1,10 +1,50 @@
-<h1>Profil de <%= @user.first_name %> <%= @user.last_name %></h1>
-<p>Email : <%= @user.email %></p>
-<p>Description : <%= @user.description %></p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-white py-3 border-bottom">
+          <div class="d-flex justify-content-between align-items-center">
+            <h1 class="h3 mb-0 text-dark">Profil de <%= @user.first_name %> <%= @user.last_name %></h1>
+            <%= link_to "Modifier mes identifiants", edit_user_registration_path, class: "btn btn-outline-secondary btn-sm" %>
+          </div>
+        </div>
+        
+        <div class="card-body p-4">
+          <div class="row mb-5">
+            <div class="col-md-4 text-center border-end">
+              <div class="rounded-circle bg-primary d-inline-flex align-items-center justify-content-center text-white mb-3" style="width: 80px; height: 80px; font-size: 2rem;">
+                <%= @user.first_name.first if @user.first_name %><%= @user.last_name.first if @user.last_name %>
+              </div>
+              <h4 class="mb-1"><%= @user.first_name %> <%= @user.last_name %></h4>
+              <p class="text-muted"><%= @user.email %></p>
+            </div>
+            
+            <div class="col-md-8 px-4">
+              <h5 class="text-uppercase text-muted small fw-bold mb-3">Ma Description</h5>
+              <p class="lead fs-6"><%= @user.description.presence || "Aucune description renseignée." %></p>
+            </div>
+          </div>
 
-<h3>Événements organisés :</h3>
-<ul>
-  <% @user.administered_events.each do |event| %>
-    <li><%= link_to event.title, event_path(event.id) %></li>
-  <% end %>
-</ul>
+          <hr class="my-4">
+
+          <div class="events-section">
+            <h3 class="h4 mb-4">Événements organisés :</h3>
+            
+            <% if @user.administered_events.any? %>
+              <div class="list-group">
+                <% @user.administered_events.each do |event| %>
+                  <%= link_to event.title, event_path(event.id), class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center" %>
+                <% end %>
+              </div>
+            <% else %>
+              <div class="alert alert-light text-center border">
+                <p class="mb-0">Vous n'avez pas encore créé d'événement.</p>
+                <%= link_to "Créer un événement", new_event_path, class: "btn btn-link" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

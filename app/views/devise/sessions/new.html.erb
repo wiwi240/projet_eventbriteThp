@@ -1,0 +1,57 @@
+<div class="container py-5">
+  <div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="col-12 col-md-5 col-lg-4">
+      
+      <div class="card shadow-sm p-4 p-md-5 bg-white">
+        
+        <div class="text-center mb-5">
+          <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
+            <i class="bi bi-shield-lock text-primary fs-3"></i>
+          </div>
+          <h2 class="fw-bolder h3 text-dark mb-1">Connexion</h2>
+          <p class="text-muted small">Accédez à votre espace organisateur</p>
+        </div>
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f| %>
+          
+          <div class="mb-3">
+            <%= f.label :email, "Adresse email", class: "form-label small fw-bold text-uppercase text-muted" %>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-0"><i class="bi bi-envelope text-muted"></i></span>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg bg-light border-0 fs-6", placeholder: "nom@exemple.com" %>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <%= f.label :password, "Mot de passe", class: "form-label small fw-bold text-uppercase text-muted" %>
+            </div>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-0"><i class="bi bi-key text-muted"></i></span>
+              <%= f.password_field :password, autocomplete: "current-password", class: "form-control form-control-lg bg-light border-0 fs-6", placeholder: "••••••••" %>
+            </div>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="mb-4 form-check">
+              <%= f.check_box :remember_me, class: "form-check-input border-secondary shadow-none" %>
+              <%= f.label :remember_me, "Rester connecté", class: "form-check-label small text-muted fw-medium" %>
+            </div>
+          <% end %>
+
+          <div class="d-grid gap-2">
+            <%= f.submit "Se connecter", class: "btn btn-primary btn-lg rounded-pill fw-bold py-3" %>
+          </div>
+
+        <% end %>
+
+        <div class="text-center mt-5 pt-3 border-top">
+          <p class="text-muted small mb-0">Nouveau sur Eventbrite ?</p>
+          <%= link_to "Créer un compte gratuitement", new_registration_path(resource_name), class: "text-primary fw-bold text-decoration-none" %>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,10 +1,43 @@
-<h1>Événements à venir</h1>
+<div class="p-5 mb-4 bg-hero-gradient text-white rounded-3 shadow">
+  <div class="container-fluid py-5 text-center">
+    <h1 class="display-4 fw-bold text-white">Événements à venir</h1>
+    <p class="fs-4">Découvrez et participez aux meilleurs événements organisés par la communauté THP.</p>
+    <% if user_signed_in? %>
+      <%= link_to "Organiser un événement", new_event_path, class: "btn btn-light btn-lg px-4 fw-bold shadow-sm" %>
+    <% end %>
+  </div>
+</div>
 
-<ul>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="events-grid">
   <% @events.each do |event| %>
-    <li>
-      <strong><%= event.title %></strong> - <%= event.location %> (<%= event.price %>€) 
-      | <%= link_to "Voir l'événement", event_path(event.id) %>
-    </li>
+    <div class="col">
+      <div class="card h-100 shadow-sm event-card transition">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <%# Affichage de la catégorie avec un style badge discret %>
+            <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-10 px-2 py-1 rounded small fw-bold">
+              <%= event.category.presence || "Général" %>
+            </span>
+            <small class="text-muted"><i class="bi bi-geo-alt-fill me-1"></i><%= event.location %></small>
+          </div>
+
+          <h5 class="card-title fw-bold mb-3 text-dark mt-2"><%= event.title %></h5>
+          
+          <div class="mb-3">
+             <span class="text-success fw-bold fs-5"><%= event.price %> €</span>
+          </div>
+
+          <p class="card-text text-secondary mb-4">
+            <%= truncate(event.description, length: 100) %>
+          </p>
+        </div>
+        
+        <div class="card-footer bg-transparent border-0 pb-4 px-4">
+          <%= link_to event_path(event.id), class: "btn btn-outline-primary w-100 rounded-pill fw-bold stretched-link" do %>
+            Voir les détails
+          <% end %>
+        </div>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>

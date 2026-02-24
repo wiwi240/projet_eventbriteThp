@@ -1,7 +1,72 @@
-<h1><%= @event.title %></h1>
-<p>Lieu : <%= @event.location %></p>
-<p>Prix : <%= @event.price %>€</p>
-<p>Description : <%= @event.description %></p>
-<p>Admin : <%= @event.admin.first_name %></p>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <%# Header de l'événement %>
+      <div class="card shadow-sm mb-4">
+        <div class="card-body p-4 p-md-5">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <span class="badge bg-soft-primary text-primary px-3 py-2 rounded-pill fw-bold">
+              <%= @event.price %> €
+            </span>
+            <div class="text-muted small">
+              <i class="bi bi-calendar3 me-1"></i> Créé le <%= @event.created_at.strftime("%d/%m/%Y") %>
+            </div>
+          </div>
 
-<%= link_to "Retour", root_path %>
+          <h1 class="display-5 fw-bold text-dark mb-4"><%= @event.title %></h1>
+          
+          <div class="row g-4 mb-5">
+            <div class="col-md-6">
+              <div class="d-flex align-items-center">
+                <div class="bg-light rounded-3 p-3 me-3 text-primary">
+                  <i class="bi bi-clock-fill fs-4"></i>
+                </div>
+                <div>
+                  <div class="small text-muted text-uppercase fw-bold">Horaire</div>
+                  <div class="fw-medium">De <%= @event.start_date.strftime("%H:%M") %> à <%= @event.end_date.strftime("%H:%M") %></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex align-items-center">
+                <div class="bg-light rounded-3 p-3 me-3 text-primary">
+                  <i class="bi bi-geo-alt-fill fs-4"></i>
+                </div>
+                <div>
+                  <div class="small text-muted text-uppercase fw-bold">Lieu</div>
+                  <div class="fw-medium"><%= @event.location %></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h4 class="fw-bold mb-3">Description</h4>
+          <p class="text-secondary lh-lg mb-5"><%= @event.description %></p>
+
+          <div class="d-flex align-items-center p-4 bg-light rounded-4">
+            <div class="avatar bg-white border text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold me-3" style="width: 48px; height: 48px;">
+              <%= @event.admin.first_name[0] %>
+            </div>
+            <div class="flex-grow-1">
+              <div class="small text-muted">Organisé par</div>
+              <div class="fw-bold text-dark"><%= @event.admin.first_name %> <%= @event.admin.last_name %></div>
+            </div>
+            <div>
+              <% if user_signed_in? %>
+                <button class="btn btn-primary rounded-pill px-4 shadow-sm" disabled>Rejoindre</button>
+              <% else %>
+                <%= link_to "Se connecter pour s'inscrire", new_user_session_path, class: "btn btn-outline-primary rounded-pill px-4" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center">
+        <%= link_to root_path, class: "text-muted text-decoration-none small" do %>
+          <i class="bi bi-arrow-left me-1"></i> Retour aux événements
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

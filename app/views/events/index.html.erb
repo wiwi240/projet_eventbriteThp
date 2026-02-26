@@ -1,61 +1,38 @@
-<%# --- SECTION HERO / JUMBOTRON --- %>
-<div class="p-5 mb-4 bg-hero-gradient text-white rounded-3 shadow">
-  <div class="container-fluid py-5 text-center">
-    <h1 class="display-4 fw-bold text-white">Événements à venir</h1>
-    <p class="fs-4">Découvrez et participez aux meilleurs événements organisés par la communauté THP.</p>
-    <% if user_signed_in? %>
-      <%= link_to "Organiser un événement", new_event_path, class: "btn btn-light btn-lg px-4 fw-bold shadow-sm" %>
-    <% end %>
-  </div>
-</div>
+<%# On supprime la navbar d'ici car elle est déjà dans layouts/application.html.erb %>
 
-<%# --- GRILLE DES ÉVÉNEMENTS --- %>
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="events-grid">
-  <% @events.each do |event| %>
-    <div class="col">
-      <div class="card h-100 shadow-sm event-card transition overflow-hidden border-0">
-        
-        <%# --- AJOUT : IMAGE DE L'ÉVÉNEMENT (Active Storage) --- %>
-        <div class="card-img-top" style="height: 200px; overflow: hidden; background-color: #e9ecef;">
-          <% if event.event_picture.attached? %>
-            <%= image_tag event.event_picture, alt: event.title, class: "w-100 h-100", style: "object-fit: cover;" %>
-          <% else %>
-            <%# Image par défaut si aucune photo n'est jointe %>
-            <div class="w-100 h-100 d-flex align-items-center justify-content-center text-muted">
-              <i class="bi bi-image fs-1 opacity-25"></i>
-            </div>
-          <% end %>
-        </div>
-
-        <div class="card-body p-4">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <%# Badge de catégorie %>
-            <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-10 px-2 py-1 rounded small fw-bold">
-              <%= event.category.presence || "Général" %>
-            </span>
-            <small class="text-muted"><i class="bi bi-geo-alt-fill me-1"></i><%= event.location %></small>
-          </div>
-
-          <%# Titre et Prix %>
-          <h5 class="card-title fw-bold mb-3 text-dark mt-2"><%= event.title %></h5>
-          
-          <div class="mb-3">
-             <span class="text-success fw-bold fs-5"><%= event.price %> €</span>
-          </div>
-
-          <%# Extrait de la description %>
-          <p class="card-text text-secondary mb-4">
-            <%= truncate(event.description, length: 100) %>
-          </p>
-        </div>
-        
-        <%# Pied de carte avec lien vers le show %>
-        <div class="card-footer bg-transparent border-0 pb-4 px-4">
-          <%= link_to event_path(event.id), class: "btn btn-outline-primary w-100 rounded-pill fw-bold stretched-link" do %>
-            Voir les détails
-          <% end %>
-        </div>
-      </div>
+<section class="py-5">
+  <div class="container px-5 my-5">
+    <div class="text-center mb-5">
+      <h1 class="fw-bolder">Événements à venir</h1>
+      <p class="lead fw-normal text-muted mb-0">Découvrez les meilleures expériences près de chez vous</p>
     </div>
-  <% end %>
-</div>
+    
+    <div class="row gx-5">
+      <% @events.each do |event| %>
+        <div class="col-lg-4 mb-5">
+          <div class="card h-100 shadow border-0">
+            <%# Image de l'événement %>
+            <img class="card-img-top" src="https://dummyimage.com/600x350/ced4da/6c757d" alt="..." />
+            
+            <div class="card-body p-4">
+              <div class="badge bg-primary bg-gradient rounded-pill mb-2">Live</div>
+              <h5 class="card-title mb-3"><%= event.title %></h5>
+              <p class="card-text mb-0 text-dark"><%= event.description %></p>
+            </div>
+            
+            <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+              <div class="d-flex align-items-end justify-content-between">
+                <div class="d-flex align-items-center">
+                  <div class="small">
+                    <div class="fw-bold text-dark"><%= event.admin.email %></div>
+                    <div class="text-muted"><%= event.start_date.strftime('%d %b %Y') %></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

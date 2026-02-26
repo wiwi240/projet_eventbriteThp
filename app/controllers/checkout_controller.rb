@@ -4,24 +4,24 @@ class CheckoutController < ApplicationController
 
   def create
     @event = Event.find(params[:event_id])
-    
-    # IMPORTANT : Stripe exige un entier pur. 
+
+    # IMPORTANT : Stripe exige un entier pur.
     # Exemple : 12.50€ devient 1250 centimes.
     @total_amount = (@event.price * 100).to_i
 
     @session = Stripe::Checkout::Session.create(
-      payment_method_types: ['card'],
-      line_items: [{
+      payment_method_types: [ "card" ],
+      line_items: [ {
         price_data: {
-          currency: 'eur',
+          currency: "eur",
           product_data: {
-            name: @event.title,
+            name: @event.title
           },
-          unit_amount: @total_amount,
+          unit_amount: @total_amount
         },
-        quantity: 1,
-      }],
-      mode: 'payment',
+        quantity: 1
+      } ],
+      mode: "payment",
       # URLs de retour basées sur "resources :checkout"
       success_url: success_checkout_index_url + "?session_id={CHECKOUT_SESSION_ID}&event_id=#{@event.id}",
       cancel_url: cancel_checkout_index_url

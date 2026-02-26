@@ -20,7 +20,7 @@ Rails.application.configure do
   # --- CONFIGURATION MAILER ---
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_caching = false
-  
+
   # Mode :test pour afficher les mails dans le terminal (évite Launchy/WSL Error)
   config.action_mailer.delivery_method = :test
   config.action_mailer.perform_deliveries = true

@@ -33,10 +33,10 @@ puts "Création des événements avec prix cohérents..."
   admin = users.sample
   category_name = CATEGORY_DATA.keys.sample
   price_range = CATEGORY_DATA[category_name]
-  
+
   # Utilisation de Faker::Commerce ou Faker::Book pour des titres plus stables
   title = "#{category_name} : #{Faker::Commerce.product_name}"
-  
+
   event = Event.new(
     admin: admin,
     category: category_name,
@@ -45,7 +45,7 @@ puts "Création des événements avec prix cohérents..."
     price: rand(price_range[:min]..price_range[:max]),
     location: Faker::Address.city,
     start_date: Faker::Time.forward(days: 30, period: :evening),
-    duration: [30, 60, 90, 120].sample
+    duration: [ 30, 60, 90, 120 ].sample
   )
 
   if event.save

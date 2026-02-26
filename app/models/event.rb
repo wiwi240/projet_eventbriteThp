@@ -3,14 +3,15 @@ class Event < ApplicationRecord
   belongs_to :admin, class_name: "User"
   has_many :attendances, dependent: :destroy
   has_many :users, through: :attendances
-  
-  # AJOUT : Active Storage pour la photo de l'événement
+
+  # Active Storage
   has_one_attached :event_picture
 
   # --- VALIDATIONS ---
-  
-  # Photo obligatoire (Consigne 2.1)
+
+  # Photo : présence obligatoire et contrôle du format/taille
   validate :picture_must_be_attached
+  validate :event_picture_format
 
   # Date de début
   validates :start_date, presence: true
@@ -23,7 +24,7 @@ class Event < ApplicationRecord
   # Contenu
   validates :title, presence: true, length: { in: 5..140 }
   validates :description, presence: true, length: { in: 20..1000 }
-  
+
   # Prix et Lieu
   validates :price, presence: true, inclusion: { in: 1..1000 }
   validates :location, presence: true
@@ -36,10 +37,23 @@ class Event < ApplicationRecord
 
   private
 
-  # Validation pour la photo obligatoire
+  # Vérifie que la photo est présente
   def picture_must_be_attached
     unless event_picture.attached?
       errors.add(:event_picture, "doit être jointe à l'événement")
+    end
+  end
+
+  # Vérifie le format et la taille du fichier
+  def event_picture_format
+    return unless event_picture.attached?
+
+    unless event_picture.content_type.in?(%w[image/jpeg image/png image/gif])
+      errors.add(:event_picture, "doit être au format JPG, PNG ou GIF")
+    end
+
+    if event_picture.byte_size > 5.megabytes
+      errors.add(:event_picture, "est trop lourde (maximum 5 Mo)")
     end
   end
 

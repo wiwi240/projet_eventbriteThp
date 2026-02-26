@@ -44,7 +44,7 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   group :development do
-  gem 'letter_opener'
+  gem "letter_opener"
 end
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
@@ -65,8 +65,8 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'table_print'
-gem 'devise' 
-gem 'faker'
-gem 'stripe'
-gem 'dotenv-rails', groups: [:development, :test]
+gem "table_print"
+gem "devise"
+gem "faker"
+gem "stripe"
+gem "dotenv-rails", groups: [ :development, :test ]

@@ -1,55 +1,56 @@
-<nav class="navbar navbar-expand-lg navbar-light sticky-top py-3">
-  <div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top py-3">
+  <div class="container px-5">
     
-    <%= link_to root_path, class: "navbar-brand fw-bold fs-3 ls-tight d-flex align-items-center" do %>
-      <span class="text-dark">EVENT</span><span class="text-primary">BRITE</span>
+    <%= link_to root_path, class: "navbar-brand fw-bold fs-3 d-flex align-items-center" do %>
+      <span class="text-white">EVENT</span><span class="text-primary">BRITE</span>
     <% end %>
 
-    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarMain">
       
-      <%# BARRE DE RECHERCHE INTEGRÉE %>
+      <%# BARRE DE RECHERCHE %>
       <div class="mx-auto w-50 d-none d-lg-block">
         <div class="input-group">
-          <span class="input-group-text bg-light border-0 rounded-start-pill ps-3"><i class="bi bi-search text-muted"></i></span>
-          <input type="text" class="form-control bg-light border-0 rounded-end-pill py-2" placeholder="Trouver un événement...">
+          <span class="input-group-text bg-secondary border-0 rounded-start-pill ps-3"><i class="bi bi-search text-light"></i></span>
+          <input type="text" class="form-control bg-secondary text-white border-0 rounded-end-pill py-2 shadow-none" placeholder="Trouver un événement..." style="--bs-bg-opacity: .2;">
         </div>
       </div>
 
       <ul class="navbar-nav ms-auto align-items-center">
         <li class="nav-item">
-          <%= link_to "Parcourir", root_path, class: "nav-link fw-semibold px-3 text-dark" %>
+          <%= link_to "Parcourir", root_path, class: "nav-link px-3" %>
         </li>
 
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to new_event_path, class: "btn btn-primary rounded-pill px-4 fw-bold shadow-custom mx-lg-2 text-white" do %>
+            <%= link_to new_event_path, class: "nav-link px-3 text-primary fw-bold" do %>
               <i class="bi bi-plus-lg me-1"></i> Créer
             <% end %>
           </li>
 
           <li class="nav-item dropdown ms-lg-2">
-            <a class="nav-link dropdown-toggle d-flex align-items-center p-0" href="#" role="button" data-bs-toggle="dropdown">
-              <div class="avatar-container shadow-sm">
-                <span class="fw-bold text-primary"><%= current_user.email[0].upcase %></span>
+            <a class="nav-link dropdown-toggle d-flex align-items-center p-0" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%# LA CAGE QUI BLOQUE L'IMAGE %>
+              <div class="avatar-nav-wrapper">
+                <%= user_avatar(current_user, size: 35) %>
               </div>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-custom rounded-4 p-2 mt-3 animate slideIn">
-              <li class="px-3 py-2 border-bottom mb-2 bg-light rounded-top-4">
-                <small class="text-muted d-block">Utilisateur</small>
-                <span class="fw-bold text-dark small text-truncate d-block" style="max-width: 150px;"><%= current_user.email %></span>
+            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 p-2 mt-3" aria-labelledby="navbarDropdown">
+              <li class="px-3 py-2 border-bottom mb-2">
+                <small class="text-muted d-block">Connecté en tant que</small>
+                <span class="fw-bold text-dark small"><%= current_user.email %></span>
               </li>
               <li>
                 <%= link_to user_path(current_user), class: "dropdown-item rounded-3 py-2" do %>
-                  <i class="bi bi-person-badge me-2 text-primary"></i> Mon Profil
+                  <i class="bi bi-person me-2"></i> Mon Profil
                 <% end %>
               </li>
               <li>
                 <%= link_to edit_user_registration_path, class: "dropdown-item rounded-3 py-2" do %>
-                  <i class="bi bi-gear-fill me-2 text-secondary"></i> Paramètres
+                  <i class="bi bi-gear me-2"></i> Paramètres
                 <% end %>
               </li>
               <li><hr class="dropdown-divider"></li>
@@ -62,10 +63,10 @@
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Se connecter", new_user_session_path, class: "nav-link fw-semibold text-dark px-3" %>
+            <%= link_to "Se connecter", new_user_session_path, class: "nav-link px-3" %>
           </li>
           <li class="nav-item ms-lg-2">
-            <%= link_to "S'inscrire", new_user_registration_path, class: "btn btn-outline-dark rounded-pill px-4 fw-bold" %>
+            <%= link_to "S'inscrire", new_user_registration_path, class: "btn btn-outline-light rounded-pill px-4 btn-sm fw-bold" %>
           </li>
         <% end %>
 

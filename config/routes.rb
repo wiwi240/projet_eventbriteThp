@@ -1,22 +1,22 @@
 Rails.application.routes.draw do
   root "events#index"
   devise_for :users
-  
+
   # --- ÉVÉNEMENTS ---
   resources :events do
     # Inscriptions aux événements
-    resources :attendances, only: [:create]
+    resources :attendances, only: [ :create ]
   end
 
   # --- UTILISATEURS & AVATARS ---
   # Imbrication nécessaire pour associer l'avatar à un user_id spécifique
-  resources :users, only: [:show] do
-    resources :avatars, only: [:create]
+  resources :users, only: [ :show ] do
+    resources :avatars, only: [ :create ]
   end
 
   # --- STRIPE CHECKOUT ---
   # Ajout de :index pour supporter checkout_index_path
-  resources :checkout, only: [:index, :create] do
+  resources :checkout, only: [ :index, :create ] do
     collection do
       get :success
       get :cancel

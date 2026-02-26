@@ -1,9 +1,9 @@
 class EventsController < ApplicationController
   # 1. On sécurise les actions de modification/suppression
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  
+  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy ]
+
   # 2. On vérifie que c'est bien l'organisateur AVANT d'agir
-  before_action :is_admin?, only: [:edit, :update, :destroy]
+  before_action :is_admin?, only: [ :edit, :update, :destroy ]
 
   def index
     @events = Event.all.order(start_date: :asc)
@@ -64,7 +64,7 @@ class EventsController < ApplicationController
 
   def is_admin?
     @event = Event.find(params[:id])
-    
+
     unless current_user == @event.admin
       redirect_to root_path, alert: "Vous n'êtes pas l'organisateur de cet événement !"
     end

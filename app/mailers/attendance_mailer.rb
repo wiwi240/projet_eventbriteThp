@@ -1,5 +1,5 @@
 class AttendanceMailer < ApplicationMailer
-  default from: 'no-reply@eventbrite-thp.fr'
+  default from: "no-reply@eventbrite-thp.fr"
 
   def attendance_email(attendance)
     @attendance = attendance

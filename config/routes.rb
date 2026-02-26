@@ -2,19 +2,21 @@ Rails.application.routes.draw do
   root "events#index"
   devise_for :users
   
-  # CRUD standard pour les événements
+  # --- ÉVÉNEMENTS ---
   resources :events do
-    # Uniquement Create pour l'inscription (POST)
+    # Inscriptions aux événements
     resources :attendances, only: [:create]
   end
 
-  resources :users, only: [:show]
+  # --- UTILISATEURS & AVATARS ---
+  # Imbrication nécessaire pour associer l'avatar à un user_id spécifique
+  resources :users, only: [:show] do
+    resources :avatars, only: [:create]
+  end
 
   # --- STRIPE CHECKOUT ---
-  # On utilise 'resources' pour rester RESTful.
-  # 'collection' permet d'ajouter les routes de retour (success/cancel)
-  # qui sont des pages d'affichage (donc GET par nature).
-  resources :checkout, only: [:create] do
+  # Ajout de :index pour supporter checkout_index_path
+  resources :checkout, only: [:index, :create] do
     collection do
       get :success
       get :cancel

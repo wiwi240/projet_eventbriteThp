@@ -35,7 +35,6 @@ class EventsController < ApplicationController
   # --- AJOUTS JOUR 3 : MODIFICATION & SUPPRESSION ---
 
   def edit
-    # @event est déjà chargé par le before_action is_admin? ou on le re-find ici par sécurité
     @event = Event.find(params[:id])
   end
 
@@ -57,16 +56,15 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location, :category)
+    # AJOUT : :event_picture est maintenant permis pour Active Storage
+    params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location, :category, :event_picture)
   end
 
   # --- SECURITE ---
 
   def is_admin?
-    # On récupère l'ID pour vérifier
     @event = Event.find(params[:id])
     
-    # Si le current_user n'est pas l'admin de l'event, on l'éjecte
     unless current_user == @event.admin
       redirect_to root_path, alert: "Vous n'êtes pas l'organisateur de cet événement !"
     end

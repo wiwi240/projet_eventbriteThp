@@ -4,6 +4,7 @@
       <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
         <div class="row g-0">
           
+          <%# --- COLONNE GAUCHE : INFOS ORGANISATEUR --- %>
           <div class="col-md-4 bg-light d-flex flex-column align-items-center justify-content-center p-5 text-center border-end-md">
             <div class="avatar bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 100px; height: 100px; font-size: 2.5rem; font-weight: 800;">
               <% if current_user.respond_to?(:first_name) && current_user.first_name.present? %>
@@ -26,11 +27,13 @@
             </p>
           </div>
 
+          <%# --- COLONNE DROITE : FORMULAIRE --- %>
           <div class="col-md-8 bg-white p-5">
             <h2 class="fw-bold text-primary mb-4">Créer un événement</h2>
             
             <%= form_with model: @event, local: true, class: "d-grid gap-3" do |f| %>
 
+              <%# --- AFFICHAGE DES ERREURS --- %>
               <% if @event.errors.any? %>
                 <div class="alert alert-danger rounded-3">
                   <ul class="mb-0 small">
@@ -41,27 +44,31 @@
                 </div>
               <% end %>
 
+              <%# --- TITRE --- %>
               <div class="form-floating">
                 <%= f.text_field :title, class: "form-control", placeholder: "Titre" %>
                 <%= f.label :title, "Titre de l'événement" %>
               </div>
 
-              <%# --- AJOUT DU CHAMP CATÉGORIE ICI --- %>
+              <%# --- CATÉGORIE --- %>
               <div class="form-floating">
                 <%= f.select :category, ["Concert", "Sport", "Théâtre", "Conférence", "Autre"], { prompt: "Choisir une catégorie..." }, { class: "form-select" } %>
                 <%= f.label :category, "Catégorie" %>
               </div>
 
+              <%# --- DESCRIPTION --- %>
               <div class="form-floating">
                 <%= f.text_area :description, style: "height: 120px", class: "form-control", placeholder: "Description" %>
                 <%= f.label :description, "Description détaillée" %>
               </div>
 
+              <%# --- DATE ET DURÉE (MIS À JOUR : datetime_local_field) --- %>
               <div class="row g-2">
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <%= f.date_field :start_date, class: "form-control", placeholder: "Date", min: Date.today %>
-                    <%= f.label :start_date, "Date de début" %>
+                    <%# Permet la sélection de la date ET de l'heure précise %>
+                    <%= f.datetime_local_field :start_date, class: "form-control", placeholder: "Date et heure", min: Time.now.strftime('%Y-%m-%dT%H:%M') %>
+                    <%= f.label :start_date, "Date et heure de début" %>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -72,6 +79,7 @@
                 </div>
               </div>
 
+              <%# --- PRIX ET LIEU --- %>
               <div class="row g-2">
                 <div class="col-md-6">
                   <div class="form-floating">
@@ -87,6 +95,14 @@
                 </div>
               </div>
 
+              <%# --- CHAMP PHOTO (Active Storage) --- %>
+              <div class="mb-3">
+                <%= f.label :event_picture, "Photo de l'événement (obligatoire)", class: "form-label fw-bold text-primary small" %>
+                <%= f.file_field :event_picture, class: "form-control rounded-3 shadow-sm" %>
+                <div class="form-text small">Importez une image au format JPG, PNG ou GIF.</div>
+              </div>
+
+              <%# --- ACTIONS --- %>
               <div class="d-grid gap-2 mt-4">
                 <%= f.submit "Publier l'événement", class: "btn btn-primary btn-lg rounded-pill fw-bold shadow-sm" %>
                 <%= link_to "Annuler", root_path, class: "btn btn-light rounded-pill text-muted" %>

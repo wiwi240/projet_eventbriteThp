@@ -4,6 +4,7 @@
       <div class="card shadow-lg border-0 rounded-4">
         <div class="card-body p-5">
           
+          <%# --- EN-TÊTE --- %>
           <div class="text-center mb-4">
             <h2 class="fw-bold text-primary">Modifier l'événement</h2>
             <p class="text-muted">Mettez à jour les informations</p>
@@ -11,6 +12,7 @@
 
           <%= form_with model: @event, local: true, class: "d-grid gap-3" do |f| %>
 
+            <%# --- GESTION DES ERREURS --- %>
             <% if @event.errors.any? %>
               <div class="alert alert-danger rounded-3">
                 <ul class="mb-0 small">
@@ -21,27 +23,47 @@
               </div>
             <% end %>
 
+            <%# --- TITRE --- %>
             <div class="form-floating">
               <%= f.text_field :title, class: "form-control", placeholder: "Titre" %>
               <%= f.label :title, "Titre" %>
             </div>
 
-            <%# --- AJOUT CATÉGORIE --- %>
+            <%# --- CATÉGORIE --- %>
             <div class="form-floating">
                <%= f.select :category, ["Concert", "Sport", "Théâtre", "Conférence", "Autre"], { prompt: "Choisir une catégorie..." }, { class: "form-select" } %>
               <%= f.label :category, "Catégorie" %>
             </div>
 
+            <%# --- DESCRIPTION --- %>
             <div class="form-floating">
               <%= f.text_area :description, style: "height: 150px", class: "form-control", placeholder: "Description" %>
               <%= f.label :description, "Description" %>
             </div>
 
+            <%# --- MODIFICATION DE LA PHOTO (Active Storage) --- %>
+            <div class="mb-3 px-1">
+              <%= f.label :event_picture, "Photo de l'événement", class: "form-label fw-bold text-primary small" %>
+              
+              <%# Affichage de la miniature actuelle si une photo existe %>
+              <% if @event.event_picture.attached? %>
+                <div class="mb-3 text-center bg-light p-3 rounded-3 border border-dashed">
+                  <p class="small text-muted mb-2">Aperçu de l'image actuelle :</p>
+                  <%= image_tag @event.event_picture, class: "img-thumbnail shadow-sm", style: "max-height: 150px;" %>
+                </div>
+              <% end %>
+
+              <%= f.file_field :event_picture, class: "form-control rounded-3 shadow-sm" %>
+              <div class="form-text small">Téléversez un nouveau fichier pour remplacer l'image existante.</div>
+            </div>
+
+            <%# --- DATE ET DURÉE (MIS À JOUR : datetime_local_field) --- %>
             <div class="row g-2">
               <div class="col-md-6">
                 <div class="form-floating">
-                  <%= f.date_field :start_date, class: "form-control", placeholder: "Date" %>
-                  <%= f.label :start_date, "Date de début" %>
+                  <%# Utilisation de datetime_local_field pour modifier l'horaire précis %>
+                  <%= f.datetime_local_field :start_date, class: "form-control", placeholder: "Date et heure" %>
+                  <%= f.label :start_date, "Date et heure de début" %>
                 </div>
               </div>
               <div class="col-md-6">
@@ -52,28 +74,35 @@
               </div>
             </div>
 
+            <%# --- PRIX --- %>
             <div class="form-floating">
               <%= f.number_field :price, min: 1, max: 1000, class: "form-control", placeholder: "Prix" %>
               <%= f.label :price, "Prix (€)" %>
             </div>
 
+            <%# --- LIEU --- %>
             <div class="form-floating">
               <%= f.text_field :location, class: "form-control", placeholder: "Lieu" %>
               <%= f.label :location, "Lieu" %>
             </div>
             
+            <%# --- BOUTONS D'ACTION --- %>
             <div class="d-grid gap-2 mt-4">
-              <%= f.submit "Enregistrer", class: "btn btn-primary btn-lg rounded-pill fw-bold shadow-sm" %>
+              <%= f.submit "Enregistrer les modifications", class: "btn btn-primary btn-lg rounded-pill fw-bold shadow-sm" %>
               <%= link_to "Annuler", event_path(@event), class: "btn btn-light rounded-pill text-muted" %>
             </div>
 
           <% end %>
 
-          <hr class="my-4">
+          <hr class="my-4 border-light">
 
+          <%# --- ZONE CRITIQUE --- %>
           <div class="text-center">
-            <p class="text-danger small fw-bold mb-2">Zone de danger</p>
-            <%= button_to "Supprimer cet événement", event_path(@event), method: :delete, data: { turbo_confirm: "Êtes-vous sûr ?" }, class: "btn btn-outline-danger btn-sm rounded-pill px-4" %>
+            <p class="text-danger small fw-bold mb-2 text-uppercase tracking-wider">Zone de danger</p>
+            <%= button_to "Supprimer définitivement l'événement", event_path(@event), 
+                method: :delete, 
+                data: { turbo_confirm: "Cette action est irréversible. Voulez-vous continuer ?" }, 
+                class: "btn btn-outline-danger btn-sm rounded-pill px-4" %>
           </div>
 
         </div>

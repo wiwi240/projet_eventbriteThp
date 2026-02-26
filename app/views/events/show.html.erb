@@ -5,7 +5,14 @@
       <%# --- CARTE PRINCIPALE --- %>
       <div class="card shadow-lg border-0 rounded-4 overflow-hidden mb-4">
         
-        <%# Header %>
+        <%# --- AJOUT : BANNIÈRE DE L'ÉVÉNEMENT (Active Storage) --- %>
+        <% if @event.event_picture.attached? %>
+          <div class="event-banner shadow-sm" style="max-height: 400px; overflow: hidden;">
+            <%= image_tag @event.event_picture, alt: 'banner', class: "w-100 h-100", style: "object-fit: cover; min-height: 300px;" %>
+          </div>
+        <% end %>
+
+        <%# Header avec dégradé (Contient Titre et Prix) %>
         <div class="bg-hero-gradient p-4 text-white">
           <div class="d-flex justify-content-between align-items-start">
              <span class="badge bg-white text-primary px-3 py-2 rounded-pill fw-bold shadow-sm">
@@ -16,11 +23,14 @@
             </div>
           </div>
           <h1 class="display-5 fw-bold mt-3 mb-0"><%= @event.title %></h1>
+          <% if @event.category.present? %>
+            <span class="badge bg-white bg-opacity-25 mt-2 rounded-pill small"><%= @event.category %></span>
+          <% end %>
         </div>
 
         <div class="card-body p-4 p-md-5">
           
-          <%# --- INFO GRID --- %>
+          <%# --- INFO GRID (Horaires et Lieu) --- %>
           <div class="row g-4 mb-5">
             <div class="col-md-6">
               <div class="d-flex align-items-center p-3 bg-light rounded-4 h-100">
@@ -51,16 +61,17 @@
             </div>
           </div>
 
+          <%# --- DESCRIPTION --- %>
           <h4 class="fw-bold mb-3">À propos de l'événement</h4>
           <p class="text-secondary lh-lg mb-5"><%= simple_format(@event.description) %></p>
 
-          <%# --- ACTION BAR --- %>
+          <%# --- ACTION BAR (Organisateur et Bouton Participation) --- %>
           <div class="d-flex flex-column flex-md-row align-items-center justify-content-between p-4 bg-light rounded-4 border">
             
-            <%# Organisateur %>
+            <%# Infos Organisateur %>
             <div class="d-flex align-items-center mb-3 mb-md-0 w-100">
               <div class="avatar-container me-3 shadow-sm" style="width: 48px; height: 48px; min-width: 48px;">
-                 <div class="bg-white text-primary w-100 h-100 d-flex align-items-center justify-content-center fw-bold fs-5">
+                 <div class="bg-white text-primary w-100 h-100 d-flex align-items-center justify-content-center fw-bold fs-5 rounded-circle border">
                     <%= @event.admin.email[0].upcase %>
                  </div>
               </div>
@@ -70,31 +81,30 @@
               </div>
             </div>
 
-            <%# --- BOUTONS D'ACTION --- %>
+            <%# Boutons contextuels %>
             <div class="ms-md-4 w-100 w-md-auto text-end">
               <% if user_signed_in? %>
                 
-                <%# CAS 1 : Organisateur -> Modifier l'événement %>
+                <%# Cas 1 : Admin -> Gérer %>
                 <% if current_user == @event.admin %>
                   <%= link_to edit_event_path(@event), class: "btn btn-outline-primary fw-bold rounded-pill px-4 shadow-sm w-100" do %>
                     <i class="bi bi-gear-fill me-1"></i> Gérer
                   <% end %>
 
-                <%# CAS 2 : Déjà inscrit %>
+                <%# Cas 2 : Déjà inscrit %>
                 <% elsif @event.users.include?(current_user) %>
                   <button class="btn btn-success fw-bold rounded-pill px-4 shadow-sm w-100" disabled>
                     <i class="bi bi-check-circle-fill me-1"></i> Inscrit
                   </button>
 
-                <%# CAS 3 : Visiteur -> Paiement Stripe %>
+                <%# Cas 3 : Participer via Stripe %>
                 <% else %>
-                  <%# CORRECTION ICI : checkout_index_path au lieu de checkout_create_path %>
-                  <%= button_to checkout_index_path(event_id: @event.id), method: :post, data: { turbo: false }, class: "btn btn-primary fw-bold rounded-pill px-4 shadow-custom transition-up w-100" do %>
+                  <%= button_to checkout_index_path(event_id: @event.id), method: :post, data: { turbo: false }, class: "btn btn-primary fw-bold rounded-pill px-4 shadow-custom transition-up w-100 text-white" do %>
                     Rejoindre (<%= @event.price %>€)
                   <% end %>
                 <% end %>
 
-              <%# CAS 4 : Non connecté %>
+              <%# Cas 4 : Non connecté %>
               <% else %>
                 <%= link_to "Se connecter", new_user_session_path, class: "btn btn-dark fw-bold rounded-pill px-4 shadow-sm w-100" %>
               <% end %>
@@ -111,14 +121,14 @@
             <h5 class="fw-bold mb-3">Participants inscrits (<%= @attendances.count %>)</h5>
             <ul class="list-group list-group-flush">
               <% @attendances.each do |attendance| %>
-                <li class="list-group-item px-0 d-flex align-items-center justify-content-between">
+                <li class="list-group-item px-0 d-flex align-items-center justify-content-between bg-transparent">
                   <div class="d-flex align-items-center">
                     <div class="bg-light rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px;">
                       <i class="bi bi-person-fill text-secondary"></i>
                     </div>
                     <span><%= attendance.user.email %></span>
                   </div>
-                  <span class="badge bg-success bg-opacity-10 text-success rounded-pill">Payé</span>
+                  <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-2">Payé</span>
                 </li>
               <% end %>
             </ul>
@@ -126,6 +136,7 @@
         </div>
       <% end %>
 
+      <%# --- LIEN DE RETOUR --- %>
       <div class="text-center">
         <%= link_to root_path, class: "text-muted text-decoration-none small fw-medium hover-link" do %>
           <i class="bi bi-arrow-left me-1"></i> Retour aux événements

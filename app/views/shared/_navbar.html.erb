@@ -1,21 +1,25 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top py-3">
   <div class="container px-5">
     
+    <%# LOGO %>
     <%= link_to root_path, class: "navbar-brand fw-bold fs-3 d-flex align-items-center" do %>
       <span class="text-white">EVENT</span><span class="text-primary">BRITE</span>
     <% end %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+    <%# BOUTON MOBILE %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarMain">
       
-      <%# BARRE DE RECHERCHE %>
+      <%# BARRE DE RECHERCHE (Visible uniquement sur ordinateur) %>
       <div class="mx-auto w-50 d-none d-lg-block">
         <div class="input-group">
-          <span class="input-group-text bg-secondary border-0 rounded-start-pill ps-3"><i class="bi bi-search text-light"></i></span>
-          <input type="text" class="form-control bg-secondary text-white border-0 rounded-end-pill py-2 shadow-none" placeholder="Trouver un événement..." style="--bs-bg-opacity: .2;">
+          <span class="input-group-text bg-secondary border-0 rounded-start-pill ps-3">
+            <i class="bi bi-search text-light"></i>
+          </span>
+          <input type="text" class="form-control bg-secondary text-white border-0 rounded-end-pill py-2 shadow-none search-input" placeholder="Trouver un événement...">
         </div>
       </div>
 
@@ -25,15 +29,16 @@
         </li>
 
         <% if user_signed_in? %>
+          <%# BOUTON CRÉER %>
           <li class="nav-item">
             <%= link_to new_event_path, class: "nav-link px-3 text-primary fw-bold" do %>
               <i class="bi bi-plus-lg me-1"></i> Créer
             <% end %>
           </li>
 
+          <%# MENU DÉROULANT PROFIL %>
           <li class="nav-item dropdown ms-lg-2">
             <a class="nav-link dropdown-toggle d-flex align-items-center p-0" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <%# LA CAGE QUI BLOQUE L'IMAGE %>
               <div class="avatar-nav-wrapper">
                 <%= user_avatar(current_user, size: 35) %>
               </div>
@@ -62,6 +67,7 @@
             </ul>
           </li>
         <% else %>
+          <%# LIENS VISITEURS %>
           <li class="nav-item">
             <%= link_to "Se connecter", new_user_session_path, class: "nav-link px-3" %>
           </li>

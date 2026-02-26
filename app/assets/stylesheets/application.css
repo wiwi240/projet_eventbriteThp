@@ -10883,3 +10883,17 @@ html {
   object-fit: cover !important;
   transform: none !important;
 }
+
+/* Force l'affichage du menu quand Bootstrap ajoute la classe .show */
+.dropdown-menu.show {
+  display: block !important;
+}
+
+/* Cage de l'avatar pour éviter le zoom géant */
+.avatar-nav-wrapper {
+  width: 35px !important;
+  height: 35px !important;
+  overflow: hidden !important;
+  border-radius: 50% !important;
+  pointer-events: none; /* Le clic traverse vers le bouton du menu */
+}

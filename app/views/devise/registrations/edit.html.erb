@@ -13,8 +13,9 @@
 
             <div class="row mb-4 align-items-center">
               <div class="col-md-4 text-center">
-                <div class="avatar-base avatar-profile shadow-sm mx-auto mb-2">
-                  <%= user_avatar(resource, size: 120) %>
+                <%# --- ZONE AVATAR FIXE --- %>
+                <div class="profile-avatar-container shadow-sm mx-auto mb-2">
+                  <%= user_avatar(resource, size: 80) %>
                 </div>
               </div>
               <div class="col-md-8">
@@ -58,9 +59,6 @@
                 <%= f.label :password, "Nouveau mot de passe", class: "form-label fw-semibold mb-0" %>
                 <span class="text-muted d-block small mb-2">(Laissez vide si vous ne voulez pas le changer)</span>
                 <%= f.password_field :password, autocomplete: "new-password", class: "form-control rounded-pill px-3 shadow-none" %>
-                <% if @minimum_password_length %>
-                  <div class="form-text small"><%= @minimum_password_length %> caractères minimum</div>
-                <% end %>
               </div>
 
               <div class="mb-3">

@@ -6,7 +6,8 @@ class EventsController < ApplicationController
   before_action :is_admin?, only: [ :edit, :update, :destroy ]
 
   def index
-    @events = Event.all.order(start_date: :asc)
+    # On affiche uniquement les événements validés par l'administration
+    @events = Event.where(is_validated: true).order(start_date: :asc)
   end
 
   def show
@@ -14,7 +15,16 @@ class EventsController < ApplicationController
 
     if @event.nil?
       redirect_to root_path, alert: "Événement introuvable."
+      return
     end
+
+    # Sécurité : Si l'événement n'est pas validé, seul l'admin ou l'organisateur peut y accéder
+    if !@event.is_validated && (current_user != @event.admin && (!current_user&.is_admin))
+      redirect_to root_path, alert: "Cet événement est en attente de validation."
+      return
+    end
+
+    @attendances = @event.attendances
   end
 
   def new
@@ -31,8 +41,6 @@ class EventsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-
-  # --- AJOUTS JOUR 3 : MODIFICATION & SUPPRESSION ---
 
   def edit
     @event = Event.find(params[:id])
@@ -56,11 +64,8 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    # AJOUT : :event_picture est maintenant permis pour Active Storage
     params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location, :category, :event_picture)
   end
-
-  # --- SECURITE ---
 
   def is_admin?
     @event = Event.find(params[:id])

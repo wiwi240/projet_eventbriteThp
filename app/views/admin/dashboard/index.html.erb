@@ -1,0 +1,35 @@
+<div class="container py-5">
+  <h1 class="fw-bold mb-4">Tableau de bord Administrateur</h1>
+
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 rounded-4 p-3">
+        <div class="card-body">
+          <h5 class="text-muted small text-uppercase fw-bold">Utilisateurs</h5>
+          <p class="display-6 fw-bold"><%= @users_count %></p>
+          <%= link_to "Gérer les membres", "#", class: "btn btn-sm btn-outline-dark w-100 rounded-pill" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 rounded-4 p-3">
+        <div class="card-body">
+          <h5 class="text-muted small text-uppercase fw-bold">Événements en ligne</h5>
+          <p class="display-6 fw-bold"><%= @validated_events_count %></p>
+          <%= link_to "Voir le catalogue", "#", class: "btn btn-sm btn-outline-dark w-100 rounded-pill" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm border-warning bg-warning bg-opacity-10 rounded-4 p-3">
+        <div class="card-body">
+          <h5 class="text-warning small text-uppercase fw-bold">En attente</h5>
+          <p class="display-6 fw-bold text-warning"><%= @pending_events_count %></p>
+          <%= link_to "Valider les soumissions", admin_event_submissions_path, class: "btn btn-sm btn-warning w-100 rounded-pill fw-bold" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

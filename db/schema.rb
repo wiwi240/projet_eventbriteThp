@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_26_110338) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_27_150904) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -60,6 +60,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_26_110338) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "category"
+    t.boolean "is_validated", default: false
     t.index ["admin_id"], name: "index_events_on_admin_id"
   end
 
@@ -75,6 +76,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_26_110338) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "stripe_customer_id"
+    t.boolean "is_admin"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

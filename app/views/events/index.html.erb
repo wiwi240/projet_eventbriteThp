@@ -12,12 +12,16 @@
         <div class="col-lg-4 mb-5">
           <div class="card h-100 shadow border-0">
             <%# Image de l'événement %>
-            <img class="card-img-top" src="https://dummyimage.com/600x350/ced4da/6c757d" alt="..." />
+            <% if event.event_picture.attached? %>
+              <%= image_tag event.event_picture, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+            <% else %>
+              <img class="card-img-top" src="https://dummyimage.com/600x350/ced4da/6c757d" alt="..." />
+            <% end %>
             
             <div class="card-body p-4">
               <div class="badge bg-primary bg-gradient rounded-pill mb-2">Live</div>
               <h5 class="card-title mb-3"><%= event.title %></h5>
-              <p class="card-text mb-0 text-dark"><%= event.description %></p>
+              <p class="card-text mb-0 text-dark"><%= truncate(event.description, length: 100) %></p>
             </div>
             
             <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
@@ -28,6 +32,8 @@
                     <div class="text-muted"><%= event.start_date.strftime('%d %b %Y') %></div>
                   </div>
                 </div>
+                <%# Bouton de redirection vers la page de l'événement %>
+                <%= link_to "Voir le détail", event_path(event), class: "btn btn-outline-primary btn-sm rounded-pill px-3 shadow-sm" %>
               </div>
             </div>
           </div>

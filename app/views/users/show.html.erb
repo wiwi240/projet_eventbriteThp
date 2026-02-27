@@ -13,15 +13,14 @@
           <div class="row mb-5">
             <div class="col-md-4 text-center border-end">
               
-              <%# --- SECTION AVATAR (Mise à jour avec Helper) --- %>
-              <div class="avatar-base avatar-profile shadow-sm mb-3">
-                <%= user_avatar(@user) %>
+              <%# --- ZONE AVATAR FIXE --- %>
+              <div class="profile-avatar-container shadow-sm mb-3 mx-auto">
+                <%= user_avatar(@user, size: 150) %>
               </div>
 
               <h4 class="mb-1 fw-bold"><%= @user.first_name %> <%= @user.last_name %></h4>
               <p class="text-muted small mb-4"><%= @user.email %></p>
 
-              <%# --- FORMULAIRE D'UPLOAD --- %>
               <% if current_user == @user %>
                 <div class="px-3">
                   <div class="p-3 border rounded-3 bg-light bg-opacity-50">
@@ -49,7 +48,6 @@
 
           <hr class="my-5 opacity-25">
 
-          <%# --- SECTION ÉVÉNEMENTS --- %>
           <div class="events-section">
             <h3 class="h4 fw-bold mb-4 text-dark">Événements organisés</h3>
             

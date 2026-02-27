@@ -1,0 +1,46 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0 text-dark fw-bold">Soumissions en attente</h1>
+    <%= link_to "Retour Dashboard", admin_root_path, class: "btn btn-outline-secondary btn-sm rounded-pill" %>
+  </div>
+
+  <div class="card shadow-sm border-0 rounded-4">
+    <div class="card-body p-0">
+      <% if @pending_events.any? %>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="bg-light">
+              <tr>
+                <th class="px-4 py-3 text-muted small text-uppercase fw-bold">Événement</th>
+                <th class="py-3 text-muted small text-uppercase fw-bold">Organisateur</th>
+                <th class="px-4 py-3 text-end text-muted small text-uppercase fw-bold">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @pending_events.each do |event| %>
+                <tr>
+                  <td class="px-4">
+                    <div class="fw-bold text-dark"><%= event.title %></div>
+                    <div class="small text-muted"><%= event.start_date.strftime("%d/%m/%Y") %></div>
+                  </td>
+                  <td><%= event.admin.email %></td>
+                  <td class="px-4 text-end">
+                    <div class="d-flex justify-content-end gap-2">
+                      <%= link_to "Voir", event_path(event), class: "btn btn-light btn-sm rounded-pill border" %>
+                      <%# Utilise la route admin_event_submission_path définie dans routes.rb %>
+                      <%= button_to "Valider", admin_event_submission_path(event), method: :patch, class: "btn btn-success btn-sm rounded-pill px-3 shadow-none" %>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% else %>
+        <div class="text-center py-5">
+          <p class="text-muted mb-0">Aucun événement en attente de validation.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

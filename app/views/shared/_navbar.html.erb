@@ -29,6 +29,16 @@
         </li>
 
         <% if user_signed_in? %>
+          
+          <%# --- AJOUT : LIEN ADMINISTRATION (Visible uniquement pour l'admin) --- %>
+          <% if current_user.is_admin %>
+            <li class="nav-item">
+              <%= link_to admin_root_path, class: "nav-link px-3 text-danger fw-bold" do %>
+                <i class="bi bi-shield-lock-fill me-1"></i> Admin
+              <% end %>
+            </li>
+          <% end %>
+
           <%# BOUTON CRÉER %>
           <li class="nav-item">
             <%= link_to new_event_path, class: "nav-link px-3 text-primary fw-bold" do %>

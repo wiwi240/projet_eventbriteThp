@@ -43,6 +43,11 @@ h5 {
     color: rgba(11, 54, 38, 0.85);
 }
 
+/* links manually colored with .text-primary should stay green even inside navbar-custom */
+.navbar-custom .nav-link.text-primary {
+    color: var(--primary-green) !important;
+}
+
 .navbar-custom .nav-link:hover {
     color: var(--primary-green);
 }

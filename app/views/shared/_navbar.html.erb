@@ -29,7 +29,8 @@
 
       <ul class="navbar-nav ms-auto align-items-center">
         <li class="nav-item">
-          <%= link_to "Parcourir", root_path, class: "nav-link px-3" %>
+          <!-- make browse link stand out with primary/green text -->
+          <%= link_to "Parcourir", root_path, class: "nav-link px-3 text-primary" %>
         </li>
 
         <% if user_signed_in? %>
@@ -83,7 +84,8 @@
         <% else %>
           <%# LIENS VISITEURS %>
           <li class="nav-item">
-            <%= link_to "Se connecter", new_user_session_path, class: "nav-link px-3" %>
+            <!-- login link should also use primary color for emphasis -->
+            <%= link_to "Se connecter", new_user_session_path, class: "nav-link px-3 text-primary" %>
           </li>
           <li class="nav-item ms-lg-2">
             <%= link_to "S'inscrire", new_user_registration_path, class: "btn btn-outline-success rounded-pill px-4 btn-sm fw-bold" %>

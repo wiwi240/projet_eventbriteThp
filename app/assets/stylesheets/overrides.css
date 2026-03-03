@@ -1,0 +1,77 @@
+/* Cyber Futurist Overrides - compact and focused */
+
+:root {
+    --neon-cyan: #00eaff;
+    --neon-indigo: #6f42c1;
+    --bg-panel: rgba(255, 255, 255, 0.03);
+}
+
+/* Navbar customizations */
+.navbar-custom {
+    background: linear-gradient(90deg, rgba(8, 10, 20, 0.9), rgba(3, 6, 10, 0.95));
+    border-bottom: 1px solid rgba(0, 234, 255, 0.06);
+}
+
+.navbar-custom .navbar-brand {
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: var(--neon-cyan) !important;
+    text-shadow: 0 0 8px rgba(0, 234, 255, 0.12);
+}
+
+.navbar-custom .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.navbar-custom .nav-link:hover {
+    color: #fff;
+}
+
+/* Panels and cards */
+.card.cyber-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(0, 234, 255, 0.06);
+    box-shadow: 0 6px 18px rgba(3, 6, 10, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.card.cyber-card .card-title {
+    color: #e6faff;
+}
+
+/* Buttons */
+.btn-neon {
+    background: linear-gradient(90deg, var(--neon-cyan), #00c4d9);
+    color: #001;
+    border: 0;
+    box-shadow: 0 6px 18px rgba(0, 234, 255, 0.08);
+}
+
+.btn-outline-neon {
+    color: var(--neon-cyan);
+    border: 1px solid rgba(0, 234, 255, 0.16);
+}
+
+/* Subtle glass container */
+.glass-container {
+    background: var(--bg-panel);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(6px) saturate(120%);
+    padding: 1rem;
+    border-radius: .6rem;
+}
+
+/* Jumbotron tweaks */
+.jumbotron .lead {
+    opacity: 0.95;
+}
+
+.jumbotron .btn {
+    box-shadow: 0 8px 30px rgba(0, 234, 255, 0.12);
+}
+
+/* Responsive spacing adjustments */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}

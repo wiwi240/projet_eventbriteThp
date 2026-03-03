@@ -53,6 +53,15 @@ h5 {
     color: #e6faff;
 }
 
+/* Improve card title/text contrast for professional look */
+.card .card-title {
+    color: #f8fbff !important;
+    font-weight: 700;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+}
+.card .card-text {
+    color: #d8eef8 !important;
+}
 /* Buttons */
 .btn-neon {
     background: linear-gradient(90deg, var(--neon-cyan), #00c4d9);

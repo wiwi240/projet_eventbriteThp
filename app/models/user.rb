@@ -11,6 +11,9 @@ class User < ApplicationRecord
   # --- ACTIVE STORAGE ---
   has_one_attached :avatar
 
+  # commentaires de l'utilisateur
+  has_many :comments, dependent: :destroy
+
   # --- VALIDATIONS ---
   validate :avatar_format
 

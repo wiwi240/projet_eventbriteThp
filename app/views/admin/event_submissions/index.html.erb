@@ -18,20 +18,7 @@
             </thead>
             <tbody>
               <% @pending_events.each do |event| %>
-                <tr>
-                  <td class="px-4">
-                    <div class="fw-bold text-dark"><%= event.title %></div>
-                    <div class="small text-muted"><%= event.start_date.strftime("%d/%m/%Y") %></div>
-                  </td>
-                  <td><%= event.admin.email %></td>
-                  <td class="px-4 text-end">
-                    <div class="d-flex justify-content-end gap-2">
-                      <%= link_to "Voir", event_path(event), class: "btn btn-light btn-sm rounded-pill border" %>
-                      <%# Utilise la route admin_event_submission_path définie dans routes.rb %>
-                      <%= button_to "Valider", admin_event_submission_path(event), method: :patch, class: "btn btn-success btn-sm rounded-pill px-3 shadow-none" %>
-                    </div>
-                  </td>
-                </tr>
+                <%= render 'admin/event_submission_row', event: event %>
               <% end %>
             </tbody>
           </table>

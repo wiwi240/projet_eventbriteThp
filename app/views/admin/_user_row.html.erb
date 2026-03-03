@@ -1,0 +1,25 @@
+<tr class="<%= 'table-primary' if user == current_user %>">
+  <td class="px-4">
+    <div class="d-flex align-items-center">
+      <div class="fw-bold"><%= user.email %></div>
+      <% if user == current_user %>
+        <span class="badge bg-primary ms-2">Vous</span>
+      <% end %>
+    </div>
+  </td>
+  <td>
+    <% if user.is_admin %>
+      <span class="badge bg-dark text-white">Admin</span>
+    <% else %>
+      <span class="badge bg-secondary text-white">Membre</span>
+    <% end %>
+  </td>
+  <td><%= user.created_at.strftime("%d/%m/%Y") %></td>
+  <td class="text-end px-4">
+    <% unless user == current_user %>
+      <%= button_to "Bannir", admin_user_path(user), method: :delete, 
+          form: { data: { turbo_confirm: "Êtes-vous sûr de vouloir supprimer cet utilisateur ?" } }, 
+          class: "btn btn-sm btn-outline-danger" %>
+    <% end %>
+  </td>
+</tr>

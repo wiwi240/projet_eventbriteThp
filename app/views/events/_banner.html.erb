@@ -1,0 +1,6 @@
+<%# Partial pour la bannière de l'événement. local: event %>
+<% if event.event_picture.attached? %>
+  <div class="event-banner shadow-sm" style="max-height: 400px; overflow: hidden;">
+    <%= image_tag event.event_picture, alt: 'banner', class: "w-100 h-100", style: "object-fit: cover; min-height: 300px;" %>
+  </div>
+<% end %>

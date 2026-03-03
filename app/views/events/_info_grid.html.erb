@@ -1,0 +1,29 @@
+<div class="row g-4 mb-5">
+  <div class="col-md-6">
+    <div class="d-flex align-items-center p-3 bg-light rounded-4 h-100">
+      <div class="text-primary me-3">
+        <i class="bi bi-clock-fill fs-3"></i>
+      </div>
+      <div>
+        <div class="small text-muted text-uppercase fw-bold">Horaire</div>
+        <div class="fw-medium">
+          <%= event.start_date.strftime("%H:%M") %>
+          <% if event.duration %>
+            - <%= (event.start_date + event.duration * 60).strftime("%H:%M") %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="d-flex align-items-center p-3 bg-light rounded-4 h-100">
+      <div class="text-primary me-3">
+        <i class="bi bi-geo-alt-fill fs-3"></i>
+      </div>
+      <div>
+        <div class="small text-muted text-uppercase fw-bold">Lieu</div>
+        <div class="fw-medium text-break"><%= event.location %></div>
+      </div>
+    </div>
+  </div>
+</div>

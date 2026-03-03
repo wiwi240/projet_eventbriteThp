@@ -12647,7 +12647,12 @@ html {
 .card-title,
 .card-text,
 .card-footer,
-h1, h2, h3, h4, h5, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
   color: #212529 !important;
 }
 
@@ -12665,7 +12670,10 @@ h1, h2, h3, h4, h5, p {
 }
 
 /* Correction pour la visibilité des textes sur les boutons colorés */
-.btn-primary, .btn-success, .btn-dark, .btn-danger {
+.btn-primary,
+.btn-success,
+.btn-dark,
+.btn-danger {
   color: #ffffff !important;
 }
 
@@ -12684,27 +12692,32 @@ h1, h2, h3, h4, h5, p {
 
 /* --- A. AVATAR DE LA NAVBAR (Miniature) --- */
 .avatar-nav-wrapper {
-  width: 50px !important;   /* Taille de la cage */
+  width: 50px !important;
+  /* Taille de la cage */
   height: 50px !important;
   overflow: hidden !important;
   border-radius: 50% !important;
   display: flex !important;
   align-items: center;
   justify-content: center;
-  background-color: #f8f9fa; /* Fond clair si l'image charge mal */
-  pointer-events: none;      /* Le clic traverse pour activer le menu */
+  background-color: #f8f9fa;
+  /* Fond clair si l'image charge mal */
+  pointer-events: none;
+  /* Le clic traverse pour activer le menu */
 }
 
-.avatar-nav-wrapper img, 
+.avatar-nav-wrapper img,
 .avatar-nav-wrapper .avatar-image {
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover !important; /* L'image remplit le cercle sans se déformer */
+  object-fit: cover !important;
+  /* L'image remplit le cercle sans se déformer */
 }
 
 /* --- B. AVATAR DU PROFIL (Grand format) --- */
 .profile-avatar-container {
-  width: 150px !important;   /* Taille de la cage */
+  width: 150px !important;
+  /* Taille de la cage */
   height: 150px !important;
   overflow: hidden !important;
   border-radius: 50% !important;
@@ -12713,7 +12726,8 @@ h1, h2, h3, h4, h5, p {
   display: flex !important;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;            /* Centre l'avatar horizontalement */
+  margin: 0 auto;
+  /* Centre l'avatar horizontalement */
 }
 
 /* L'image à l'intérieur de la cage de profil */
@@ -12721,6 +12735,8 @@ h1, h2, h3, h4, h5, p {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  border: 2px solid #ffffff;  /* Petit contour blanc pour le style */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  border: 2px solid #ffffff;
+  /* Petit contour blanc pour le style */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* Ombre légère */
 }

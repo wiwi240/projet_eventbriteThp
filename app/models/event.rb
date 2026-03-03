@@ -7,6 +7,9 @@ class Event < ApplicationRecord
   # Active Storage
   has_one_attached :event_picture
 
+  # commentaires
+  has_many :comments, dependent: :destroy
+
   # --- VALIDATIONS ---
 
   # Photo : présence obligatoire et contrôle du format/taille

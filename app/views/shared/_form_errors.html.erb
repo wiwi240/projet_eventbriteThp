@@ -1,0 +1,10 @@
+<%# Partial pour afficher les erreurs d'un modèle. Doit être appelé en passant la variable locale `resource` %>
+<% if resource && resource.errors.any? %>
+  <div class="alert alert-danger rounded-3">
+    <ul class="mb-0 small">
+      <% resource.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

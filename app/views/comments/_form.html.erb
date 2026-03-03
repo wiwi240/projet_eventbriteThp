@@ -1,0 +1,6 @@
+<%= form_with model: [event, Comment.new], local: true, class: "mt-4" do |f| %>
+  <div class="mb-3">
+    <%= f.text_area :content, class: "form-control", placeholder: "Laissez un commentaire...", rows: 3 %>
+  </div>
+  <%= f.submit "Envoyer", class: "btn btn-primary btn-sm" %>
+<% end %>

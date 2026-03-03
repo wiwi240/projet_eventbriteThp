@@ -1,0 +1,9 @@
+<div class="container mt-4">
+  <%# affiche tous les flashs convertis en classes Bootstrap %>
+  <% flash.each do |type, msg| %>
+    <div class="alert <%= bootstrap_class_for_flash(type) %> alert-dismissible fade show border-0 shadow-sm" role="alert">
+      <%= msg %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  <% end %>
+</div>

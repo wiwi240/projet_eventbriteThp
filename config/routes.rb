@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # --- ÉVÉNEMENTS PUBLICS ---
   resources :events do
     resources :attendances, only: [:create]
+    resources :comments, only: [:create, :destroy]
   end
 
   # --- UTILISATEURS PUBLICS ---

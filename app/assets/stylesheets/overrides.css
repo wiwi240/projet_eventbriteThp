@@ -1,101 +1,84 @@
-/* Cyber Futurist Overrides - compact and focused */
+/* Green Professional Theme Overrides */
 
 :root {
-    --neon-cyan: #00eaff;
-    --neon-indigo: #6f42c1;
-    --bg-panel: rgba(255, 255, 255, 0.03);
+    --primary-green: #0ea86b; /* main brand green */
+    --primary-dark: #064e3b;  /* dark contrast for headings */
+    --muted-surface: #f6fbf8; /* light card background */
+    --glass-panel: rgba(6, 78, 59, 0.04);
+    --text-dark: #0b3626;
 }
 
-/* Fonts */
+/* Typography */
 body {
     font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    color: #e6eef6;
+    color: var(--text-dark);
+    background-color: #f4faf7;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
+h1, h2, h3, h4, h5 {
     font-family: 'Orbitron', 'Inter', sans-serif;
-    letter-spacing: 0.8px;
+    color: var(--primary-dark);
+    letter-spacing: 0.4px;
 }
 
-/* Navbar customizations */
-.navbar-custom {
-    background: linear-gradient(90deg, rgba(8, 10, 20, 0.9), rgba(3, 6, 10, 0.95));
-    border-bottom: 1px solid rgba(0, 234, 255, 0.06);
+/* Navbar: clean, light bar with green highlights */
+.navbar-custom{
+    background: linear-gradient(90deg, #eaf8ef, #f4fbf7);
+    border-bottom: 1px solid rgba(6,78,59,0.06);
+}
+.navbar-custom .navbar-brand{
+    color: var(--primary-dark) !important;
+    font-weight: 800;
+}
+.navbar-custom .nav-link{
+    color: rgba(11,54,38,0.85);
+}
+.navbar-custom .nav-link:hover{ color: var(--primary-green); }
+
+/* Cards: light surfaces with dark, readable text */
+.card, .card.cyber-card{
+    background: var(--muted-surface);
+    border: 1px solid rgba(6,78,59,0.06);
+    color: var(--text-dark);
+}
+.card .card-title{
+    color: var(--primary-dark) !important;
+    font-weight: 700;
+}
+.card .card-text{
+    color: rgba(11,54,38,0.9) !important;
 }
 
-.navbar-custom .navbar-brand {
-    font-weight: 900;
-    letter-spacing: 1px;
-    color: var(--neon-cyan) !important;
-    text-shadow: 0 0 8px rgba(0, 234, 255, 0.12);
-}
-
-.navbar-custom .nav-link {
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.navbar-custom .nav-link:hover {
+/* Buttons: primary green, clear contrast */
+.btn-primary, .btn-neon{
+    background: linear-gradient(90deg, var(--primary-green), #0aa05f);
+    border-color: var(--primary-green);
     color: #fff;
 }
-
-/* Panels and cards */
-.card.cyber-card {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-    border: 1px solid rgba(0, 234, 255, 0.06);
-    box-shadow: 0 6px 18px rgba(3, 6, 10, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+.btn-outline-neon{
+    color: var(--primary-dark);
+    border: 1px solid rgba(6,78,59,0.12);
 }
 
-.card.cyber-card .card-title {
-    color: #e6faff;
+/* Jumbotron: subtle green gradient, dark heading */
+.jumbotron{
+    background: linear-gradient(135deg, rgba(14,168,107,0.08), rgba(10,160,95,0.06));
+    color: var(--primary-dark);
+    padding: 3.5rem 0;
 }
+.jumbotron .btn{ box-shadow: none; }
 
-/* Improve card title/text contrast for professional look */
-.card .card-title {
-    color: #f8fbff !important;
-    font-weight: 700;
-    text-shadow: 0 1px 0 rgba(0,0,0,0.6);
-}
-.card .card-text {
-    color: #d8eef8 !important;
-}
-/* Buttons */
-.btn-neon {
-    background: linear-gradient(90deg, var(--neon-cyan), #00c4d9);
-    color: #001;
-    border: 0;
-    box-shadow: 0 6px 18px rgba(0, 234, 255, 0.08);
-}
+/* Alerts: use green/amber/danger but ensure border and background distinct */
+.alert{ border-radius: .5rem; }
+.alert-success{ background-color: #ecfbef; color: var(--primary-dark); border: 1px solid rgba(14,168,107,0.08); }
 
-.btn-outline-neon {
-    color: var(--neon-cyan);
-    border: 1px solid rgba(0, 234, 255, 0.16);
-}
+/* Glass panels */
+.glass-container{ background: var(--glass-panel); border: 1px solid rgba(6,78,59,0.04); backdrop-filter: blur(4px); }
 
-/* Subtle glass container */
-.glass-container {
-    background: var(--bg-panel);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(6px) saturate(120%);
-    padding: 1rem;
-    border-radius: .6rem;
-}
+/* Accessibility helpers */
+/* Ensure no white-on-white: any light background uses dark text explicitly */
+*[class*="bg-"]{ color: inherit; }
 
-/* Jumbotron tweaks */
-.jumbotron .lead {
-    opacity: 0.95;
-}
-
-.jumbotron .btn {
-    box-shadow: 0 8px 30px rgba(0, 234, 255, 0.12);
-}
-
-/* Responsive spacing adjustments */
-@media (min-width: 1200px) {
-    .container {
-        max-width: 1140px;
-    }
+@media (max-width: 767px){
+    .jumbotron{ padding: 2rem 0; }
 }

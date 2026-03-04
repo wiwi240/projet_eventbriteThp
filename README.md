@@ -98,6 +98,55 @@ bin/rails test
 - Palette principale définie via des variables CSS (ex: `--primary-green`).
 - Les liens de la navbar (`Parcourir`, `Se connecter`) ont été mis en évidence pour assurer un bon contraste.
 
+## 🎵 Drum Kit avec Stimulus
+
+Un projet d'entraînement JavaScript utilisant **Stimulus** (framework léger pour Rails).
+
+### Vue d'ensemble
+
+- **Page**: `/drums` — une grille de 9 touches (A—L) qui changent de couleur au clic
+- **Contrôleur Stimulus**: `app/javascript/controllers/drumkit_controller.js`
+- **Styles**: `app/assets/stylesheets/drumkit.css` (chargés uniquement sur la page drums)
+- **Sons**: `app/assets/sounds/*.wav` (fichiers silencieux de test fournis)
+
+### Fonctionnalités
+
+- **Événement clavier** : appuie sur une touche A–L → la case devient orange/rose
+- **Stimulus ciblé** : le contrôleur Stimulus ne s'exécute **que** sur `/drums` (grâce à `data-controller="drumkit"`)
+- **Asset pipeline** : sons et styles servis via Rails correctement
+
+### Tester
+
+```bash
+bin/rails server
+# puis ouvrir http://localhost:3000/drums
+# appuyer sur A S D F G H J K L
+```
+
+### Remplacer les sons
+
+Les fichiers `.wav` actuels sont des silences de test. Tu peux les remplacer par les vrais sons du [Drum Kit de Wes Bos](https://github.com/wesbos/JavaScript30/tree/master/01%20-%20JavaScript%20Drum%20Kit/sounds) en les copiant dans `app/assets/sounds/`.
+
+### Fichiers clés
+
+- `app/controllers/drums_controller.rb` — contrôleur Rails
+- `app/views/drums/index.html.erb` — vue avec `data-controller="drumkit"`
+- `app/javascript/controllers/drumkit_controller.js` — logique Stimulus
+- `app/assets/config/manifest.js` — configuration asset pipeline
+- `PLAN_D_ACTION.md` — plan de développement détaillé
+
+## 🎯 "Bonjour monde" sur toutes les pages
+
+Un fichier JS exécuté partout :
+
+```javascript
+// app/assets/javascripts/hello.js
+console.log("bonjour monde !");
+```
+
+- Inclus via `javascript_include_tag 'hello'` dans `app/views/layouts/application.html.erb`
+- Visible dans la console du navigateur sur **toutes les pages**
+
 ## Fichiers importants
 
 - `app/views/layouts/application.html.erb` — layout principal, inclusion des partials.

@@ -19,6 +19,8 @@
     <%# Overrides for futuristic theme %>
     <%= stylesheet_link_tag "overrides", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%# Bonjour monde sur toutes les pages %>
+    <%= javascript_include_tag 'hello' %>
   </head>
 
   <body class="d-flex flex-column min-vh-100">

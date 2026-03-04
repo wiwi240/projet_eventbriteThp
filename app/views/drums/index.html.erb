@@ -1,0 +1,25 @@
+<%= stylesheet_link_tag 'drumkit', media: 'all' %>
+
+<div data-controller="drumkit" class="drumkit-container">
+  <div class="keys">
+    <div data-key="65" class="key" data-drumkit-target="key"><kbd>A</kbd></div>
+    <div data-key="83" class="key" data-drumkit-target="key"><kbd>S</kbd></div>
+    <div data-key="68" class="key" data-drumkit-target="key"><kbd>D</kbd></div>
+    <div data-key="70" class="key" data-drumkit-target="key"><kbd>F</kbd></div>
+    <div data-key="71" class="key" data-drumkit-target="key"><kbd>G</kbd></div>
+    <div data-key="72" class="key" data-drumkit-target="key"><kbd>H</kbd></div>
+    <div data-key="74" class="key" data-drumkit-target="key"><kbd>J</kbd></div>
+    <div data-key="75" class="key" data-drumkit-target="key"><kbd>K</kbd></div>
+    <div data-key="76" class="key" data-drumkit-target="key"><kbd>L</kbd></div>
+  </div>
+
+  <audio data-key="65" src="<%= asset_path('clap.wav') %>"></audio>
+  <audio data-key="83" src="<%= asset_path('hihat.wav') %>"></audio>
+  <audio data-key="68" src="<%= asset_path('kick.wav') %>"></audio>
+  <audio data-key="70" src="<%= asset_path('openhat.wav') %>"></audio>
+  <audio data-key="71" src="<%= asset_path('boom.wav') %>"></audio>
+  <audio data-key="72" src="<%= asset_path('ride.wav') %>"></audio>
+  <audio data-key="74" src="<%= asset_path('snare.wav') %>"></audio>
+  <audio data-key="75" src="<%= asset_path('tom.wav') %>"></audio>
+  <audio data-key="76" src="<%= asset_path('tink.wav') %>"></audio>
+</div>

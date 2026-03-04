@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  # Drum kit demo page
+  resources :drums, only: [:index]
+
   # --- ÉVÉNEMENTS PUBLICS ---
   resources :events do
     resources :attendances, only: [:create]

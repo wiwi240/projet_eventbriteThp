@@ -5,6 +5,7 @@ puts "Nettoyage de la base de données..."
 Attendance.destroy_all
 Event.destroy_all
 User.destroy_all
+Email.destroy_all
 
 # Création de l'administrateur
 admin_user = User.create!(
@@ -86,4 +87,14 @@ pending_titles.each_with_index do |title, i|
   event.save!
 end
 
-puts "Seed terminé ! 10 événements créés."
+# Création d'emails pour le Gmail-like
+puts "Création des emails..."
+5.times do
+  Email.create!(
+    object: Faker::Lorem.sentence(word_count: 5),
+    body: Faker::Lorem.paragraph(sentence_count: 10),
+    read: false
+  )
+end
+
+puts "Seed terminé ! 10 événements et 5 emails créés."

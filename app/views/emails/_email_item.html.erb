@@ -1,0 +1,21 @@
+<li id="<%= dom_id(email) %>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <%= 'unread-style' unless email.read %>">
+  <div class="flex-grow-1 position-relative">
+    <%= link_to email.object, email_path(email), 
+        data: { turbo_stream: true }, 
+        class: "text-decoration-none stretched-link fw-bold",
+        style: "color: #{email.read ? '#fff' : 'var(--pro-yellow)'};" %>
+    <div class="small text-muted text-truncate" style="max-width: 250px;">
+      <%= email.body %>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center z-index-10" style="position: relative; z-index: 2;">
+    <%= button_to email_path(email), method: :patch, class: "btn btn-link p-1 me-2 text-decoration-none" do %>
+      <i class="bi <%= email.read ? 'bi-check2-circle text-secondary' : 'bi-lightning-fill text-warning' %>"></i>
+    <% end %>
+
+    <%= button_to email_path(email), method: :delete, class: "btn btn-link text-danger p-1", form: { data: { turbo_confirm: "SUPPRIMER?" } } do %>
+      <i class="bi bi-trash3-fill"></i>
+    <% end %>
+  </div>
+</li>

@@ -1,41 +1,37 @@
-<%# On supprime la navbar d'ici car elle est déjà dans layouts/application.html.erb %>
-
 <%= render 'jumbotron' %>
 
-<section class="py-5">
+<section class="py-5 bg-black">
   <div class="container px-5 my-5">
     <div class="text-center mb-5">
-      <h1 class="fw-bolder">Événements à venir</h1>
-      <p class="lead fw-normal text-muted mb-0">Découvrez les meilleures expériences près de chez vous</p>
+      <h1 class="fw-bolder pro-title">ÉVÉNEMENTS <span style="color: var(--pro-yellow);">À VENIR</span></h1>
+      <p class="lead fw-normal text-muted mb-0">Découvrez les meilleures expériences en haute définition</p>
     </div>
     
     <div class="row gx-5">
       <% @events.each do |event| %>
         <div class="col-lg-4 mb-5">
-          <div class="card h-100 shadow border-0">
-            <%# Image de l'événement %>
+          <div class="card h-100 pro-card shadow-lg">
             <% if event.event_picture.attached? %>
               <%= image_tag event.event_picture, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
             <% else %>
-              <img class="card-img-top" src="https://dummyimage.com/600x350/ced4da/6c757d" alt="..." />
+              <img class="card-img-top" src="https://dummyimage.com/600x350/222/FF8C00&text=EVENT" alt="..." />
             <% end %>
             
             <div class="card-body p-4">
-              <div class="badge bg-primary bg-gradient rounded-pill mb-2">Live</div>
-              <h5 class="card-title mb-3"><%= event.title %></h5>
-              <p class="card-text mb-0 text-dark"><%= truncate(event.description, length: 100) %></p>
+              <div class="badge pro-badge-live mb-2">LIVE</div>
+              <h5 class="pro-card-title mb-3"><%= event.title %></h5>
+              <p class="card-text mb-0 text-light opacity-75">
+                <%= truncate(event.description, length: 100) %>
+              </p>
             </div>
             
             <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
               <div class="d-flex align-items-end justify-content-between">
-                <div class="d-flex align-items-center">
-                  <div class="small">
-                    <div class="fw-bold text-dark"><%= event.admin.email %></div>
-                    <div class="text-muted"><%= event.start_date.strftime('%d %b %Y') %></div>
-                  </div>
+                <div class="small">
+                  <div class="fw-bold text-light"><%= event.admin.email %></div>
+                  <div class="text-warning small"><%= event.start_date.strftime('%d %b %Y') %></div>
                 </div>
-                <%# Bouton de redirection vers la page de l'événement %>
-                <%= link_to "Voir le détail", event_path(event), class: "btn btn-outline-primary btn-sm rounded-pill px-3 shadow-sm" %>
+                <%= link_to "DÉTAILS", event_path(event), class: "btn pro-btn btn-sm" %>
               </div>
             </div>
           </div>

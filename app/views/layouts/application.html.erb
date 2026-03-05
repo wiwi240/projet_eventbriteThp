@@ -6,33 +6,27 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     
-    <%# Icônes et Polices %>
+    <%# Bootstrap & Icônes %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
+    <%# Polices %>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
-    <%# Thème Bootswatch (Minty - vert) %>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.3/minty/bootstrap.min.css" crossorigin="anonymous">
-
-    <%# Un seul fichier CSS pour éviter les erreurs Propshaft en Rails 8 %>
+    <%# CSS Unique fusionné %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%# Overrides for futuristic theme %>
-    <%= stylesheet_link_tag "overrides", "data-turbo-track": "reload" %>
+    
     <%= javascript_importmap_tags %>
-    <%# Bonjour monde sur toutes les pages %>
-    <%= javascript_include_tag 'hello' %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </head>
 
-  <body class="d-flex flex-column min-vh-100">
+  <body class="bg-black text-white d-flex flex-column min-vh-100">
     <%= render 'layouts/header' %>
-    <%= render 'layouts/flash' %>
-
-    <%# Contenu principal de chaque page %>
+    
     <main class="flex-grow-1">
       <%= yield %>
     </main>
 
     <%= render 'layouts/footer' %>
-    </footer>
   </body>
 </html>

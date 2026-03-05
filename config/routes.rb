@@ -1,25 +1,23 @@
 Rails.application.routes.draw do
   root "events#index"
   
-  devise_for :users, controllers: {
-    registrations: 'users/registrations'
-  }
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  # Drum kit demo page
-  resources :drums, only: [:index]
-
-  # --- ÉVÉNEMENTS PUBLICS ---
+  # --- ÉVÉNEMENTS ---
   resources :events do
     resources :attendances, only: [:create]
     resources :comments, only: [:create, :destroy]
   end
 
-  # --- UTILISATEURS PUBLICS ---
+  # --- UTILISATEURS ---
   resources :users, only: [:show] do
     resources :avatars, only: [:create]
   end
 
-  # --- ESPACE ADMINISTRATEUR ---
+  # --- MESSAGERIE ---
+  resources :emails, only: [:index, :show, :create, :destroy, :update]
+
+  # --- ESPACE ADMIN ---
   namespace :admin do
     root to: 'dashboard#index'
     resources :users, only: [:index, :edit, :update, :destroy]
@@ -27,14 +25,12 @@ Rails.application.routes.draw do
     resources :event_submissions, only: [:index, :update]
   end
 
-  # --- STRIPE & PWA ---
+  # --- AUTRES ---
+  resources :drums, only: [:index]
   resources :checkout, only: [:index, :create] do
     collection do
-      get :success
-      get :cancel
+      resources :success, only: [:index]
+      resources :cancel, only: [:index]
     end
   end
-
-  resource :manifest, only: :show, controller: "rails/pwa", action: "manifest", as: :pwa_manifest
-  resource :service_worker, only: :show, controller: "rails/pwa", action: :service_worker, as: :pwa_service_worker
 end

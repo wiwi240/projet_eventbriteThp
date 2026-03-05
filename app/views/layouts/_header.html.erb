@@ -1,1 +1,50 @@
-<%= render 'shared/navbar' %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-warning py-3">
+  <div class="container">
+    <%= link_to root_path, class: "navbar-brand fw-bold fs-3", style: "font-family: 'Orbitron'; color: var(--pro-orange);" do %>
+      EVENT<span style="color: var(--pro-yellow);">BRITE</span>
+    <% end %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMain">
+      <form class="d-flex ms-lg-4 me-auto my-2 my-lg-0" role="search" action="<%= root_path %>" method="get">
+        <div class="input-group">
+          <span class="input-group-text bg-dark border-warning text-warning" id="search-icon">
+            <i class="bi bi-search"></i>
+          </span>
+          <input class="form-control bg-dark text-white border-warning" type="search" placeholder="Trouver un événement..." aria-label="Search" aria-describedby="search-icon" name="q">
+        </div>
+      </form>
+
+      <ul class="navbar-nav align-items-center">
+        <li class="nav-item"><%= link_to "Parcourir", root_path, class: "nav-link px-3 text-white" %></li>
+        <li class="nav-item"><%= link_to "Drum Kit", drums_path, class: "nav-link px-3 text-white" %></li>
+        
+        <% if user_signed_in? %>
+          <li class="nav-item"><%= link_to emails_path, class: "nav-link px-3", style: "color: var(--pro-yellow) !important;" do %>
+            <i class="bi bi-envelope-fill me-1"></i> Messagerie
+          <% end %></li>
+          
+          <li class="nav-item"><%= link_to admin_root_path, class: "nav-link px-3 text-white" do %>
+            <i class="bi bi-shield-lock-fill me-1"></i> Admin
+          <% end %></li>
+
+          <li class="nav-item"><%= link_to " + Créer", new_event_path, class: "nav-link px-3 text-white fw-bold" %></li>
+          
+          <li class="nav-item dropdown ms-lg-3">
+            <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">Compte</a>
+            <ul class="dropdown-menu dropdown-menu-end bg-dark border-secondary">
+              <li><%= link_to "Mon Profil", user_path(current_user), class: "dropdown-item text-white" %></li>
+              <li><hr class="dropdown-divider border-secondary"></li>
+              <li><%= button_to "Déconnexion", destroy_user_session_path, method: :delete, class: "dropdown-item text-danger w-100 text-start bg-transparent border-0" %></li>
+            </ul>
+          </li>
+        <% else %>
+          <li class="nav-item"><%= link_to "Connexion", new_user_session_path, class: "btn btn-outline-warning btn-sm ms-lg-3 px-4 rounded-pill" %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

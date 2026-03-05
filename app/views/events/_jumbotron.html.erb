@@ -1,7 +1,20 @@
-<div class="jumbotron bg-primary bg-gradient text-white py-5">
-  <div class="container text-center">
-    <h1 class="display-4 fw-bold">Bienvenue sur Eventbrite Pro</h1>
-    <p class="lead mb-4">Découvrez des événements inspirants près de chez vous ou créez le vôtre en quelques clics.</p>
-    <%= link_to "Voir les événements", root_path, class: "btn btn-lg btn-light rounded-pill fw-bold" %>
+<header class="py-5 m-4 rounded-4" style="background: linear-gradient(135deg, #111 0%, #000 100%); border: 1px solid #333;">
+  <div class="container px-5">
+    <div class="row gx-5 align-items-center justify-content-center">
+      <div class="col-lg-8 col-xl-7 col-xxl-6">
+        <div class="my-5 text-center text-xl-start">
+          <h1 class="display-5 fw-bolder mb-2" style="font-family: 'Orbitron'; color: var(--pro-orange);">
+            BIENVENUE SUR EVENTBRITE PRO
+          </h1>
+          <p class="lead fw-normal text-light opacity-75 mb-4">
+            Découvrez des événements inspirants près de chez vous ou créez le vôtre en quelques clics.
+          </p>
+          <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+            <%# Route vers l'index des événements %>
+            <%= link_to "Voir les événements", root_path, class: "btn btn-primary btn-lg px-4 me-sm-3 fw-bold rounded-pill" %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</header>

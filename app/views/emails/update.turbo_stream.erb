@@ -1,0 +1,3 @@
+<%= turbo_stream.replace @email do %>
+  <%= render "emails/email_item", email: @email %>
+<% end %>

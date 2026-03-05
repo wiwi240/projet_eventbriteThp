@@ -1,0 +1,11 @@
+<%= turbo_stream.update "email-content" do %>
+  <div class="p-4 text-white">
+    <h3 style="color: var(--pro-orange); font-family: 'Orbitron', sans-serif;"><%= @email.object %></h3>
+    <hr class="border-warning">
+    <p class="fs-5 mt-4"><%= @email.body %></p>
+  </div>
+<% end %>
+
+<%= turbo_stream.replace @email do %>
+  <%= render "emails/email_item", email: @email %>
+<% end %>

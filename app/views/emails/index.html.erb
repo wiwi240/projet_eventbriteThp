@@ -1,0 +1,36 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4" style="letter-spacing: 5px;">PRO MESSENGER</h1>
+
+  <div class="row">
+    <%# Colonne Gauche : Liste %>
+    <div class="col-md-5">
+      <div class="card shadow-lg">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">INBOX</h5>
+          <%= button_to "RECEVOIR", emails_path, method: :post, class: "btn btn-primary btn-sm rounded-pill" %>
+        </div>
+        <div class="card-body p-0">
+          <ul class="list-group list-group-flush" id="emails-list">
+            <% @emails.each do |email| %>
+              <%= render "emails/email_item", email: email %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <%# Colonne Droite : Lecture %>
+    <div class="col-md-7">
+      <div class="card shadow-lg h-100" style="border: 1px solid var(--pro-yellow) !important;">
+        <div class="card-body bg-black">
+          <%= turbo_frame_tag "email-content" do %>
+            <div class="text-center py-5 mt-5">
+              <i class="bi bi-cpu fs-1 text-warning opacity-50"></i>
+              <p class="mt-2 text-yellow">SYSTÈME PRÊT : SÉLECTIONNEZ UN FLUX</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
